@@ -4,7 +4,9 @@ static const Block blocks[] = {
 	/*{"Mem:", "free -h | awk '/^Mem/ { print $3\"/\"$2 }' | sed s/i//g",	30,		0},*/
 
 	/*{"", "date '+%b %d (%a) %I:%M%p'",					5,		0},*/
-    { "",       "sb-battery",                               1,      10},
+    { "",       "sb-date",                                  60,      11},
+    { "",       "sb-volume",                                1,       12},
+    { "",       "sb-battery",                               60,      10},
 };
 
 //sets delimiter between status commands. NULL character ('\0') means no delimiter.
