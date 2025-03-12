@@ -4,8 +4,8 @@ static const Block blocks[] = {
 	/*{"Mem:", "free -h | awk '/^Mem/ { print $3\"/\"$2 }' | sed s/i//g",	30,		0},*/
 
 	/*{"", "date '+%b %d (%a) %I:%M%p'",					5,		0},*/
-    { "",       "sb-date",                                  60,      11},
-    { "",       "sb-volume",                                1,       12},
+    { "",       "sb-date",                                  30,      1},
+    { "",       "sb-volume",                                1,       2},
     { "",       "sb-battery",                               60,      10},
 };
 

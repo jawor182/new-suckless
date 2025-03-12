@@ -10,9 +10,9 @@ static const unsigned int gappov    = 15;       /* vert outer gap between window
 static       int smartgaps          = 1;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
-static const char *fonts[]          = { "JetBrainsMonoNerdFont:size=18" };
-static const char dmenufont[]       = "JetBrainsMonoNerdFont:size=18";
+static const int swallowfloating    = 1;        /* 1 means swallow floating windows by default */
+static const char *fonts[]          = { "JetBrainsMonoNerdFont:size=14" };
+static const char dmenufont[]       = "JetBrainsMonoNerdFont:size=14";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -25,7 +25,6 @@ static const char *colors[][3]      = {
 };
 
 #define TERMINAL "kitty"
-#define TERMCLASS "Kitty"
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
@@ -37,7 +36,7 @@ static const Rule rules[] = {
 	/* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
 	{ "Gimp",    NULL,     NULL,           0,         1,          0,           0,        -1 },
 	{ "Firefox", NULL,     NULL,           1 << 8,    0,          0,          -1,        -1 },
-	{ TERMCLASS, NULL,     NULL,           0,         0,          1,           1,        -1 },
+	{ TERMINAL,  NULL,     NULL,           0,         0,          1,           0,        -1 },
 	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
 };
 
@@ -103,6 +102,7 @@ static const char *btsettintgs[]     = { TERMINAL, "-e", "bluetuith", NULL };
 static const char *passwords[]       = { "keepassxc", NULL };
 static const char *screenshot[]      = { "flameshot", "gui", NULL };
 static const char *wallpaper[]       = { "nitrogen", NULL };
+static const char *lockscreen[]      = { "xsecurelock", NULL };
 
 
 static const Key keys[] = {
@@ -141,7 +141,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	/*{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },*/
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY|ControlMask,		XK_comma,  cyclelayout,    {.i = -1 } },
+	{ MODKEY|ControlMask,		    XK_comma,  cyclelayout,    {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_period, cyclelayout,    {.i = +1 } },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
@@ -158,6 +158,7 @@ static const Key keys[] = {
     { 0,                            XF86XK_AudioPlay, spawn,   {.v = medplaypausecmd } },
     { 0,                            XF86XK_AudioNext, spawn,   {.v = mednextcmd } },
     { 0,                            XF86XK_AudioPrev, spawn,   {.v = medprevcmd } },
+    { MODKEY|ShiftMask|ControlMask, XK_l,      spawn,          {.v = lockscreen } },
     { MODKEY|ShiftMask,             XK_b,      spawn,          {.v = browser } },
     { MODKEY|ShiftMask,             XK_m,      spawn,          {.v = mail } },
     { MODKEY|ShiftMask,             XK_s,      spawn,          {.v = spotify } },
@@ -193,7 +194,7 @@ static const Button buttons[] = {
 	{ ClkStatusText,        0,              Button3,        sigstatusbar,   {.i = 3} },
 	{ ClkStatusText,        0,              Button4,        sigstatusbar,   {.i = 4} },
 	{ ClkStatusText,        0,              Button5,        sigstatusbar,   {.i = 5} },
-	{ ClkStatusText,        0,              Button1,        sigstatusbar,   {.i = 6} },
+	{ ClkStatusText,        ShiftMask,      Button1,        sigstatusbar,   {.i = 6} },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
