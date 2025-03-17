@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 0;        /* border pixel of windows */
+static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappih    = 15;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 15;       /* vert inner gap between windows */
@@ -18,10 +18,11 @@ static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
+static const char col_bordersel[]   = "#ff0000";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeSel]  = { col_gray4, col_cyan,  col_bordersel  },
 };
 
 #define TERMINAL "kitty"
@@ -87,10 +88,10 @@ static const char *dmenucmd[]        = { "dmenu_run", "-m", dmenumon, "-fn", dme
 static const char *termcmd[]         = { TERMINAL, NULL };
 static const char *browser[]         = { "brave", NULL };
 static const char *mail[]            = { "thunderbird", NULL };
-static const char *spotify[]         = { "com.spotify.Client", NULL };
+static const char *spotify[]         = { "spotify-launcher", NULL };
 static const char *obsidian[]        = { "obsidian", NULL};
 static const char *fileManager[]     = { TERMINAL, "-e", "yazi", NULL };
-static const char *altFileManager[]  = { "nautilus", NULL };
+static const char *guiFileManager[]  = { "nautilus", NULL };
 static const char *upvol[]           = { "/usr/bin/wpctl",   "set-volume", "@DEFAULT_AUDIO_SINK@",      "5%+",      NULL };
 static const char *downvol[]         = { "/usr/bin/wpctl",   "set-volume", "@DEFAULT_AUDIO_SINK@",      "5%-",      NULL };
 static const char *mutevol[]         = { "/usr/bin/wpctl",   "set-mute",   "@DEFAULT_AUDIO_SINK@",      "toggle",   NULL };
@@ -119,33 +120,33 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_h,      setcfact,       {.f = +0.25} },
 	{ MODKEY|ShiftMask,             XK_l,      setcfact,       {.f = -0.25} },
 	{ MODKEY|ShiftMask,             XK_o,      setcfact,       {.f =  0.00} },
-	{ MODKEY|Mod4Mask,              XK_u,      incrgaps,       {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_u,      incrgaps,       {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_i,      incrigaps,      {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_i,      incrigaps,      {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_o,      incrogaps,      {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_o,      incrogaps,      {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_6,      incrihgaps,     {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_6,      incrihgaps,     {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_7,      incrivgaps,     {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_7,      incrivgaps,     {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_8,      incrohgaps,     {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_8,      incrohgaps,     {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_9,      incrovgaps,     {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_9,      incrovgaps,     {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_0,      togglegaps,     {0} },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_0,      defaultgaps,    {0} },
+	{ MODKEY|Mod1Mask,              XK_u,      incrgaps,       {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_u,      incrgaps,       {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_i,      incrigaps,      {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_i,      incrigaps,      {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_o,      incrogaps,      {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_o,      incrogaps,      {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_6,      incrihgaps,     {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_6,      incrihgaps,     {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_7,      incrivgaps,     {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_7,      incrivgaps,     {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_8,      incrohgaps,     {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_8,      incrohgaps,     {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_9,      incrovgaps,     {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_9,      incrovgaps,     {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_0,      togglegaps,     {0} },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_0,      defaultgaps,    {0} },
     { MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	/*{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },*/
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	/*{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },*/
 	{ MODKEY|ControlMask,		    XK_comma,  cyclelayout,    {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_period, cyclelayout,    {.i = +1 } },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-	{ MODKEY,                       XK_f,      togglefullscr,  {0} },
+	{ MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
@@ -158,18 +159,18 @@ static const Key keys[] = {
     { 0,                            XF86XK_AudioPlay, spawn,   {.v = medplaypausecmd } },
     { 0,                            XF86XK_AudioNext, spawn,   {.v = mednextcmd } },
     { 0,                            XF86XK_AudioPrev, spawn,   {.v = medprevcmd } },
-    { MODKEY|ShiftMask|ControlMask, XK_l,      spawn,          {.v = lockscreen } },
-    { MODKEY|ShiftMask,             XK_b,      spawn,          {.v = browser } },
-    { MODKEY|ShiftMask,             XK_m,      spawn,          {.v = mail } },
-    { MODKEY|ShiftMask,             XK_s,      spawn,          {.v = spotify } },
-    { MODKEY|ShiftMask,             XK_o,      spawn,          {.v = obsidian } },
-    { MODKEY|ShiftMask,             XK_f,      spawn,          {.v = fileManager } },
-    { MODKEY|Mod1Mask|ShiftMask,    XK_f,      spawn,          {.v = altFileManager } },
+    { MODKEY,                       XK_Escape,      spawn,          {.v = lockscreen } },
+    { MODKEY,                       XK_w,      spawn,          {.v = browser } },
+    { MODKEY,                       XK_m,      spawn,          {.v = mail } },
+    { MODKEY,                       XK_s,      spawn,          {.v = spotify } },
+    { MODKEY,                       XK_o,      spawn,          {.v = obsidian } },
+    { MODKEY,                       XK_f,      spawn,          {.v = fileManager } },
+    { MODKEY|Mod1Mask,              XK_f,      spawn,          {.v = guiFileManager } },
     { MODKEY|ControlMask,           XK_s,      spawn,          {.v = audiosettintgs } },
     { MODKEY|ControlMask,           XK_b,      spawn,          {.v = btsettintgs } },
-    { MODKEY|ControlMask,           XK_p,      spawn,          {.v = passwords } },
+    { MODKEY,                       XK_p,      spawn,          {.v = passwords } },
     { MODKEY|ControlMask,           XK_w,      spawn,          {.v = wallpaper } },
-    { MODKEY|Mod1Mask,              XK_p,      spawn,          {.v = screenshot } },
+    { MODKEY|ShiftMask,             XK_s,      spawn,          {.v = screenshot } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
