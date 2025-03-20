@@ -89,9 +89,9 @@ static const char *termcmd[]         = { TERMINAL, NULL };
 static const char *browser[]         = { "brave", NULL };
 static const char *mail[]            = { "thunderbird", NULL };
 static const char *spotify[]         = { "spotify-launcher", NULL };
-static const char *obsidian[]        = { "obsidian", NULL};
+static const char *notes[]           = { "obsidian", NULL};
 static const char *fileManager[]     = { TERMINAL, "-e", "yazi", NULL };
-static const char *guiFileManager[]  = { "nautilus", NULL };
+static const char *guiFileManager[]  = { "thunar", NULL };
 static const char *upvol[]           = { "/usr/bin/wpctl",   "set-volume", "@DEFAULT_AUDIO_SINK@",      "5%+",      NULL };
 static const char *downvol[]         = { "/usr/bin/wpctl",   "set-volume", "@DEFAULT_AUDIO_SINK@",      "5%-",      NULL };
 static const char *mutevol[]         = { "/usr/bin/wpctl",   "set-mute",   "@DEFAULT_AUDIO_SINK@",      "toggle",   NULL };
@@ -159,11 +159,11 @@ static const Key keys[] = {
     { 0,                            XF86XK_AudioPlay, spawn,   {.v = medplaypausecmd } },
     { 0,                            XF86XK_AudioNext, spawn,   {.v = mednextcmd } },
     { 0,                            XF86XK_AudioPrev, spawn,   {.v = medprevcmd } },
-    { MODKEY,                       XK_Escape,      spawn,          {.v = lockscreen } },
+    { MODKEY,                       XK_Escape, spawn,          {.v = lockscreen } },
     { MODKEY,                       XK_w,      spawn,          {.v = browser } },
     { MODKEY,                       XK_m,      spawn,          {.v = mail } },
     { MODKEY,                       XK_s,      spawn,          {.v = spotify } },
-    { MODKEY,                       XK_o,      spawn,          {.v = obsidian } },
+    { MODKEY,                       XK_n,      spawn,          {.v = notes } },
     { MODKEY,                       XK_f,      spawn,          {.v = fileManager } },
     { MODKEY|Mod1Mask,              XK_f,      spawn,          {.v = guiFileManager } },
     { MODKEY|ControlMask,           XK_s,      spawn,          {.v = audiosettintgs } },
@@ -188,7 +188,7 @@ static const Key keys[] = {
 static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
-	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
+	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[13]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,              Button1,        sigstatusbar,   {.i = 1} },
 	{ ClkStatusText,        0,              Button2,        sigstatusbar,   {.i = 2} },
