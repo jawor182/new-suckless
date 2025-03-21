@@ -1,0 +1,18 @@
+--- x.c
++++ x.c
+@@ -1285,8 +1287,13 @@ xmakeglyphfontspecs(XftGlyphFontSpec *specs, const Glyph *glyphs, int len, int x
+ 			yp = winy + font->ascent;
+ 		}
+ 
+-		/* Lookup character index with default font. */
+-		glyphidx = XftCharIndex(xw.dpy, font->match, rune);
++		if (mode & ATTR_BOXDRAW) {
++			/* minor shoehorning: boxdraw uses only this ushort */
++			glyphidx = boxdrawindex(&glyphs[i]);
++		} else {
++			/* Lookup character index with default font. */
++			glyphidx = XftCharIndex(xw.dpy, font->match, rune);
++		}
+ 		if (glyphidx) {
+ 			specs[numspecs].font = font->match;
+ 			specs[numspecs].glyph = glyphidx;
