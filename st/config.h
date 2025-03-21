@@ -5,8 +5,8 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "JetBrainsMonoNerdFont=14:antialias=true:autohint=true";
-static char *font2[] = { "NotoColorEmoji:pixelsize=12:antialias=true:autohint=true" };
+static char *font = "JetBrainsMonoNerdFont=16:antialias=true:autohint=true";
+static char *font2[] = { "NotoColorEmoji:pixelsize=14:antialias=true:autohint=true" };
 
 static int borderpx = 2;
 
