@@ -11,7 +11,7 @@ static       int smartgaps          = 1;        /* 1 means no outer gap when the
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int swallowfloating    = 1;        /* 1 means swallow floating windows by default */
-static const char *fonts[]          = { "JetBrainsMonoNerdFont:size=16" };
+static const char *fonts[]          = { "JetBrainsMonoNerdFont:size=16:antialias=true", "nerd-fonts-symbols:size=14:antialias=true:autohint=true" };
 static const char dmenufont[]       = "JetBrainsMonoNerdFont:size=16";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
