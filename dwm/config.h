@@ -171,7 +171,7 @@ static const Key keys[] = {
     { MODKEY|ControlMask,           XK_b,      spawn,          {.v = btsettintgs } },
     { MODKEY,                       XK_p,      spawn,          {.v = passwords } },
     { MODKEY|ControlMask,           XK_w,      spawn,          {.v = wallpaper } },
-    { MODKEY|ShiftMask,             XK_s,      spawn,          {.v = screenshot } },
+    { MODKEY|ShiftMask,             XK_Print,  spawn,          {.v = screenshot } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
