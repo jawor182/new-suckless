@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 4;        /* border pixel of windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappih    = 15;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 15;       /* vert inner gap between windows */
@@ -87,7 +87,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[]        = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]         = { TERMINAL, NULL };
-static const char *browser[]         = { "brave", NULL };
+static const char *browser[]         = { "firefox", NULL };
 static const char *mail[]            = { "thunderbird", NULL };
 static const char *spotify[]         = { "spotify-launcher", NULL };
 static const char *notes[]           = { "obsidian", NULL};
@@ -171,7 +171,8 @@ static const Key keys[] = {
     { MODKEY|ControlMask,           XK_b,      spawn,          {.v = btsettintgs } },
     { MODKEY,                       XK_p,      spawn,          {.v = passwords } },
     { MODKEY|ControlMask,           XK_w,      spawn,          {.v = wallpaper } },
-    { MODKEY|ShiftMask,             XK_Print,  spawn,          {.v = screenshot } },
+    { MODKEY|ShiftMask,             XK_s,  spawn,              {.v = screenshot } },
+    { MODKEY,                       XK_Print,  spawn,          {.v = screenshot } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
