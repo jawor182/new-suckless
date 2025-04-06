@@ -11,7 +11,7 @@ static       int smartgaps          = 1;        /* 1 means no outer gap when the
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int swallowfloating    = 1;        /* 1 means swallow floating windows by default */
-static const char *fonts[]          = { "JetBrainsMonoNerdFont:size=16:antialias=true", "nerd-fonts-symbols:size=14:antialias=true:autohint=true" };
+static const char *fonts[]          = { "JetBrainsMonoNerdFont:size=16:antialias=true" };
 static const char dmenufont[]       = "JetBrainsMonoNerdFont:size=16";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
@@ -87,9 +87,9 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[]        = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]         = { TERMINAL, NULL };
-static const char *browser[]         = { "firefox", NULL };
-static const char *mail[]            = { "thunderbird", NULL };
-static const char *spotify[]         = { "spotify-launcher", NULL };
+static const char *browser[]         = { "librewolf", NULL };
+static const char *email[]           = { "thunderbird", NULL };
+static const char *music[]           = { "spotify-launcher", NULL };
 static const char *notes[]           = { "obsidian", NULL};
 static const char *fileManager[]     = { TERMINAL, "-e", "yazi", NULL };
 static const char *guiFileManager[]  = { "thunar", NULL };
@@ -162,8 +162,8 @@ static const Key keys[] = {
     { 0,                            XF86XK_AudioPrev, spawn,   {.v = medprevcmd } },
     { MODKEY,                       XK_Escape, spawn,          {.v = lockscreen } },
     { MODKEY,                       XK_w,      spawn,          {.v = browser } },
-    { MODKEY,                       XK_m,      spawn,          {.v = mail } },
-    { MODKEY,                       XK_s,      spawn,          {.v = spotify } },
+    { MODKEY,                       XK_e,      spawn,          {.v = email } },
+    { MODKEY,                       XK_m,      spawn,          {.v = music } },
     { MODKEY,                       XK_n,      spawn,          {.v = notes } },
     { MODKEY,                       XK_f,      spawn,          {.v = fileManager } },
     { MODKEY|Mod1Mask,              XK_f,      spawn,          {.v = guiFileManager } },
