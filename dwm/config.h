@@ -27,7 +27,6 @@ static const char *colors[][3]      = {
 
 #define TERMINAL "st"
 #define TERMCLASS "St"
-/* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
@@ -37,7 +36,6 @@ static const Rule rules[] = {
 	 */
 	/* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
 	{ "Gimp",    NULL,     NULL,           0,         1,          0,           0,        -1 },
-	{ "Firefox", NULL,     NULL,           1 << 8,    0,          0,          -1,        -1 },
 	{ TERMCLASS, NULL,     NULL,           0,         0,          1,           0,        -1 },
 	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
 };
@@ -87,12 +85,13 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[]        = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]         = { TERMINAL, NULL };
-static const char *browser[]         = { "librewolf", NULL };
+static const char *browser[]         = { "brave", NULL };
 static const char *email[]           = { "thunderbird", NULL };
 static const char *music[]           = { "spotify-launcher", NULL };
 static const char *notes[]           = { "obsidian", NULL};
-static const char *fileManager[]     = { TERMINAL, "-e", "yazi", NULL };
-static const char *guiFileManager[]  = { "thunar", NULL };
+// static const char *fileManager[]     = { TERMINAL, "-e", "yazi", NULL };
+static const char *fileManager[]     = { "thunar", NULL };
+// static const char *guiFileManager[]  = { "thunar", NULL };
 static const char *upvol[]           = { "/usr/bin/wpctl",   "set-volume", "@DEFAULT_AUDIO_SINK@",      "5%+",      NULL };
 static const char *downvol[]         = { "/usr/bin/wpctl",   "set-volume", "@DEFAULT_AUDIO_SINK@",      "5%-",      NULL };
 static const char *mutevol[]         = { "/usr/bin/wpctl",   "set-mute",   "@DEFAULT_AUDIO_SINK@",      "toggle",   NULL };
@@ -166,7 +165,7 @@ static const Key keys[] = {
     { MODKEY,                       XK_m,      spawn,          {.v = music } },
     { MODKEY,                       XK_n,      spawn,          {.v = notes } },
     { MODKEY,                       XK_f,      spawn,          {.v = fileManager } },
-    { MODKEY|Mod1Mask,              XK_f,      spawn,          {.v = guiFileManager } },
+    // { MODKEY|Mod1Mask,              XK_f,      spawn,          {.v = guiFileManager } },
     { MODKEY|ControlMask,           XK_s,      spawn,          {.v = audiosettintgs } },
     { MODKEY|ControlMask,           XK_b,      spawn,          {.v = btsettintgs } },
     { MODKEY,                       XK_p,      spawn,          {.v = passwords } },
