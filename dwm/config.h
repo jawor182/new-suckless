@@ -13,12 +13,12 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const int swallowfloating    = 1;        /* 1 means swallow floating windows by default */
 static const char *fonts[]          = { "JetBrainsMonoNerdFont:size=16:antialias=true", "NotoColorEmoji:pixelsize=16:antialias=true:autohint=true" };
 static const char dmenufont[]       = "JetBrainsMonoNerdFont:size=16";
-static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
+static const char col_gray1[]       = "#1e1e2e";
+static const char col_gray2[]       = "#585b70";
+static const char col_gray3[]       = "#cdd6f4";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
-static const char col_bordersel[]   = "#820000";
+static const char col_bordersel[]   = "#cba6f7";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -30,15 +30,15 @@ static const char *colors[][3]      = {
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
-	/* xprop(1):
-	 *	WM_CLASS(STRING) = instance, class
-	 *	WM_NAME(STRING) = title
-	 */
-	/* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
-	{ "Gimp",    NULL,     NULL,           0,         1,          0,           0,        -1 },
-	{ TERMCLASS, NULL,     NULL,           0,         0,          1,           0,        -1 },
-	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
+	/* class               instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
+	{ "Gimp",              NULL,     NULL,           0,         1,          0,           0,        -1 },
+	{ "KeePassXC",         NULL,     NULL,           1 << 8,    0,          0,           0,         0 }, // workspace 9, monitor 1
+	{ "discord",           NULL,     NULL,           1 << 7,    0,          0,           0,         1 }, // workspace 8, monitor 2
+	{ "Spotify",           NULL,     NULL,           1 << 1,    0,          0,           0,         1 }, // workspace 2, monitor 2
+	{ TERMCLASS,           NULL,     NULL,           0,         0,          1,           0,        -1 },
+	{ NULL,                NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
 };
+
 
 /* layout(s) */
 static const float mfact     = 0.5; /* factor of master area size [0.05..0.95] */
