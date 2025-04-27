@@ -52,7 +52,7 @@ static int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
+	{ "[]=",      tile },    
 	{ "[M]",      monocle },
 	{ "[@]",      spiral },
 	{ "[\\]",     dwindle },
@@ -84,7 +84,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[]        = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
+static const char *dmenucmd[]        = { "dmenu_run", NULL };
 static const char *termcmd[]         = { TERMINAL, NULL };
 static const char *browser[]         = { "brave", NULL };
 static const char *email[]           = { "thunderbird", NULL };
@@ -111,8 +111,7 @@ static const char *lockscreen[]      = { "xsecurelock", NULL };
  * Xresources preferences to load at startup
  */
 ResourcePref resources[] = {
-        { "dwm.font", STRING, &font },
-        { "dmenu.font", STRING, &dmenufont },
+        { "font",               STRING,  &font },
 		{ "normbgcolor",        STRING,  &normbgcolor },
 		{ "normbordercolor",    STRING,  &normbordercolor },
 		{ "normfgcolor",        STRING,  &normfgcolor },
@@ -163,8 +162,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	/*{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },*/
-	/*{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },*/
+	{ MODKEY,                       XK_v,      setlayout,      {.v = &layouts[13]} },
 	{ MODKEY|ControlMask,		    XK_comma,  cyclelayout,    {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_period, cyclelayout,    {.i = +1 } },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
