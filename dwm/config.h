@@ -12,7 +12,6 @@ static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
 static int swallowfloating    = 1;        /* 1 means swallow floating windows by default */
 static char font[]            = { "JetBrainsMonoNerdFont:size=16:antialias=true"};
-static char dmenufont[]       = "JetBrainsMonoNerdFont:size=16";
 static const char *fonts[]          = { font };
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
