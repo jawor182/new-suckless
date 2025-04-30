@@ -11,7 +11,6 @@ static unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected 
 static unsigned int systrayonleft = 0;    /* 0: systray in the right corner, >0: systray on left of status text */
 static unsigned int systrayspacing = 2;   /* systray spacing */
 static int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
-// static unsigned int systrayiconsize = 24; /* systray icon size in px */
 static unsigned int systrayiconsize = 32; /* systray icon size in px */
 static int showsystray        = 1;        /* 0 means no systray */
 static int smartgaps          = 1;        /* 1 means no outer gap when there is only one window */
