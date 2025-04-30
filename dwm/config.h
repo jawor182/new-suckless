@@ -3,10 +3,15 @@
 /* appearance */
 static unsigned int borderpx  = 4;        /* border pixel of windows */
 static unsigned int snap      = 32;       /* snap pixel */
-static unsigned int gappih    = 15;       /* horiz inner gap between windows */
-static unsigned int gappiv    = 15;       /* vert inner gap between windows */
-static unsigned int gappoh    = 15;       /* horiz outer gap between windows and screen edge */
-static unsigned int gappov    = 15;       /* vert outer gap between windows and screen edge */
+static unsigned int gappih    = 16;       /* horiz inner gap between windows */
+static unsigned int gappiv    = 16;       /* vert inner gap between windows */
+static unsigned int gappoh    = 16;       /* horiz outer gap between windows and screen edge */
+static unsigned int gappov    = 16;       /* vert outer gap between windows and screen edge */
+static unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+static unsigned int systrayonleft = 0;    /* 0: systray in the right corner, >0: systray on left of status text */
+static unsigned int systrayspacing = 2;   /* systray spacing */
+static int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
+static int showsystray        = 1;        /* 0 means no systray */
 static int smartgaps          = 1;        /* 1 means no outer gap when there is only one window */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
@@ -33,7 +38,7 @@ static const Rule rules[] = {
 	/* class               instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
 	{ "Gimp",              NULL,     NULL,           0,         1,          0,           0,        -1 },
 	{ "KeePassXC",         NULL,     NULL,           1 << 8,    0,          0,           0,         0 }, // workspace 9, monitor 1
-	{ "discord",           NULL,     NULL,           1 << 7,    0,          0,           0,         1 }, // workspace 8, monitor 2
+	{ "discord",           NULL,     NULL,           1 << 3,    0,          0,           0,         1 }, // workspace 8, monitor 2
 	{ "Spotify",           NULL,     NULL,           1 << 1,    0,          0,           0,         1 }, // workspace 2, monitor 2
 	{ TERMCLASS,           NULL,     NULL,           0,         0,          1,           0,        -1 },
 	{ NULL,                NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
@@ -101,8 +106,8 @@ static const char *audiosettintgs[]  = { TERMINAL, "-e", "pulsemixer", NULL };
 static const char *btsettintgs[]     = { TERMINAL, "-e", "bluetuith", NULL };
 static const char *passwords[]       = { "keepassxc", NULL };
 static const char *screenshot[]      = { "flameshot", "gui", NULL };
-static const char *wallpaper[]       = { "nitrogen", NULL };
-static const char *randomWallpaper[] = { "sh", "-c", "setbg $HOME/walls", NULL };
+static const char *wallpaper[]       = { "waypaper", NULL };
+static const char *randomWallpaper[] = { "waypaper", "--random", NULL };
 static const char *communicator[]    = { "discord", NULL };
 static const char *lockscreen[]      = { "xsecurelock", NULL };
 
