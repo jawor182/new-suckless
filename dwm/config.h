@@ -7,7 +7,7 @@ static unsigned int gappih    = 16;       /* horiz inner gap between windows */
 static unsigned int gappiv    = 16;       /* vert inner gap between windows */
 static unsigned int gappoh    = 16;       /* horiz outer gap between windows and screen edge */
 static unsigned int gappov    = 16;       /* vert outer gap between windows and screen edge */
-static unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+static unsigned int systraypinning = 1;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static unsigned int systrayonleft = 0;    /* 0: systray in the right corner, >0: systray on left of status text */
 static unsigned int systrayspacing = 2;   /* systray spacing */
 static int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
@@ -42,6 +42,7 @@ static const Rule rules[] = {
 	{ "discord",           NULL,     NULL,           1 << 3,    0,          0,           0,         1 }, // workspace 8, monitor 2
 	{ "Spotify",           NULL,     NULL,           1 << 1,    0,          0,           0,         1 }, // workspace 2, monitor 2
 	{ TERMCLASS,           NULL,     NULL,           0,         0,          1,           0,        -1 },
+	{ "floatingTerm",      NULL,     NULL,           0,         1,          1,           1,        -1 },
 	{ NULL,                NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
 };
 
@@ -91,6 +92,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[]        = { "dmenu_run", NULL };
 static const char *termcmd[]         = { TERMINAL, NULL };
+static const char *termcmdFloating[] = { TERMINAL, "-c", "floatingTerm", NULL };
 static const char *browser[]         = { "brave", NULL };
 static const char *email[]           = { "thunderbird", NULL };
 static const char *music[]           = { "spotify-launcher", NULL };
@@ -137,6 +139,7 @@ static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY|ControlMask,           XK_Return, spawn,          {.v = termcmdFloating } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
