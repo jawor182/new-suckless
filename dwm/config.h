@@ -93,7 +93,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[]        = { "dmenu_run", NULL };
 static const char *termcmd[]         = { TERMINAL, NULL };
 static const char *termcmdFloating[] = { TERMINAL, "-c", "floatingTerm", NULL };
-static const char *browser[]         = { "brave", NULL };
+static const char *browser[]         = { "floorp", NULL };
 static const char *email[]           = { "thunderbird", NULL };
 static const char *music[]           = { "spotify-launcher", NULL };
 static const char *notes[]           = { TERMINAL, "-e", "sh", "-c", "cd ~/dox/notes && $EDITOR", NULL};
@@ -112,7 +112,7 @@ static const char *screenshot[]      = { "flameshot", "gui", NULL };
 static const char *wallpaper[]       = { "waypaper", NULL };
 static const char *randomWallpaper[] = { "waypaper", "--random", NULL };
 static const char *communicator[]    = { "discord", NULL };
-static const char *lockscreen[]      = { "xsecurelock", NULL };
+static const char *lockscreen[]      = { "betterlockscreen", "-l", NULL };
 
 /*
  * Xresources preferences to load at startup
@@ -201,7 +201,7 @@ static const Key keys[] = {
     { MODKEY,                       XK_p,      spawn,          {.v = passwords } },
     { MODKEY|ShiftMask,             XK_w,      spawn,          {.v = wallpaper } },
     { MODKEY|ControlMask,           XK_w,      spawn,          {.v = randomWallpaper } },
-    { MODKEY|ShiftMask,             XK_s,  spawn,              {.v = screenshot } },
+    { MODKEY|ShiftMask,             XK_s,      spawn,          {.v = screenshot } },
     { MODKEY,                       XK_Print,  spawn,          {.v = screenshot } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
