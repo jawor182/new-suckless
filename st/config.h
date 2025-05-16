@@ -6,7 +6,7 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *font = "JetBrainsMonoNerdFont=16:antialias=true:autohint=true";
-static char *font2[] = { "NotoColorEmoji:pixelsize=14:antialias=true:autohint=true" };
+static char *font2[] = { "NotoColorEmoji:pixelsize=16:antialias=true:autohint=true" };
 
 static int borderpx = 2;
 
@@ -193,6 +193,7 @@ static uint forcemousemod = ShiftMask;
  */
 ResourcePref resources[] = {
 		{ "font",         STRING,  &font },
+		{ "font2",        STRING,  &font2 },
 		{ "color0",       STRING,  &colorname[0] },
 		{ "color1",       STRING,  &colorname[1] },
 		{ "color2",       STRING,  &colorname[2] },

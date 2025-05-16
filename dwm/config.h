@@ -17,8 +17,7 @@ static int smartgaps          = 1;        /* 1 means no outer gap when there is 
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
 static int swallowfloating    = 1;        /* 1 means swallow floating windows by default */
-static char font[]            = { "JetBrainsMonoNerdFont:size=16:antialias=true"};
-static const char *fonts[]          = { font };
+static const char *fonts[]            = { "JetBrainsMonoNerdFont:size=16:antialias=true", "NotoColorEmoji:pixelsize=16:antialias=true:autohint=true"};
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
@@ -108,7 +107,6 @@ static const char *medprevcmd[]      = { "playerctl", "previous", NULL };
 static const char *audiosettintgs[]  = { TERMINAL, "-e", "pulsemixer", NULL };
 static const char *btsettintgs[]     = { TERMINAL, "-e", "bluetuith", NULL };
 static const char *passwords[]       = { "keepassxc", NULL };
-static const char *screenshot[]      = { "flameshot", "gui", NULL };
 static const char *wallpaper[]       = { "waypaper", NULL };
 static const char *randomWallpaper[] = { "waypaper", "--random", NULL };
 static const char *communicator[]    = { "discord", NULL };
@@ -118,7 +116,7 @@ static const char *lockscreen[]      = { "betterlockscreen", "-l", NULL };
  * Xresources preferences to load at startup
  */
 ResourcePref resources[] = {
-        { "font",               STRING,  &font },
+        // { "font",               STRING,  &font },
 		{ "normbgcolor",        STRING,  &normbgcolor },
 		{ "normbordercolor",    STRING,  &normbordercolor },
 		{ "normfgcolor",        STRING,  &normfgcolor },
@@ -201,8 +199,8 @@ static const Key keys[] = {
     { MODKEY,                       XK_p,      spawn,          {.v = passwords } },
     { MODKEY|ShiftMask,             XK_w,      spawn,          {.v = wallpaper } },
     { MODKEY|ControlMask,           XK_w,      spawn,          {.v = randomWallpaper } },
-    { MODKEY|ShiftMask,             XK_s,      spawn,          {.v = screenshot } },
-    { MODKEY,                       XK_Print,  spawn,          {.v = screenshot } },
+    { MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("screenshot copy") },
+    { 0,                            XK_Print,  spawn,          SHCMD("screenshot save") },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
