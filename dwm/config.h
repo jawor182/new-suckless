@@ -3,10 +3,10 @@
 /* appearance */
 static unsigned int borderpx  = 4;        /* border pixel of windows */
 static unsigned int snap      = 32;       /* snap pixel */
-static unsigned int gappih    = 16;       /* horiz inner gap between windows */
-static unsigned int gappiv    = 16;       /* vert inner gap between windows */
-static unsigned int gappoh    = 16;       /* horiz outer gap between windows and screen edge */
-static unsigned int gappov    = 16;       /* vert outer gap between windows and screen edge */
+static unsigned int gappih    =  8;       /* horiz inner gap between windows */
+static unsigned int gappiv    =  8;       /* vert inner gap between windows */
+static unsigned int gappoh    =  8;       /* horiz outer gap between windows and screen edge */
+static unsigned int gappov    =  8;       /* vert outer gap between windows and screen edge */
 static unsigned int systraypinning = 1;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static unsigned int systrayonleft = 0;    /* 0: systray in the right corner, >0: systray on left of status text */
 static unsigned int systrayspacing = 2;   /* systray spacing */
@@ -35,14 +35,16 @@ static char *colors[][3] = {
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
-	/* class               instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
-	{ "Gimp",              NULL,     NULL,           0,         1,          0,           0,        -1 },
-	{ "KeePassXC",         NULL,     NULL,           1 << 8,    0,          0,           0,         0 }, // workspace 9, monitor 1
-	{ "discord",           NULL,     NULL,           1 << 3,    0,          0,           0,         1 }, // workspace 8, monitor 2
-	{ "Spotify",           NULL,     NULL,           1 << 1,    0,          0,           0,         1 }, // workspace 2, monitor 2
-	{ TERMCLASS,           NULL,     NULL,           0,         0,          1,           0,        -1 },
-	{ "floatingTerm",      NULL,     NULL,           0,         1,          1,           1,        -1 },
-	{ NULL,                NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
+    /* class         instance    title       tags mask  isfloating  isterminal  noswallow  monitor  borderpx */
+    { "Gimp",        NULL,       NULL,       0,         1,          0,          0,         -1,      -1 },
+    { "KeePassXC",   NULL,       NULL,       1 << 8,    0,          0,          0,          0,       -1 }, // workspace 9, monitor 1
+    { "discord",     NULL,       NULL,       1 << 3,    0,          0,          0,          1,       -1 }, // workspace 8, monitor 2
+    { "Spotify",     NULL,       NULL,       1 << 1,    0,          0,          0,          1,       -1 }, // workspace 2, monitor 2
+    { TERMCLASS,     NULL,       NULL,       0,         0,          1,          0,         -1,      -1 },
+    { "floatingTerm",NULL,       NULL,       0,         1,          1,          1,         -1,      -1 }, 
+    { NULL,          NULL,       "Event Tester", 0,     0,          0,          1,         -1,      -1 }, /* xev */
+    {"firefox",      NULL,      NULL,        0,         0,          0,          0,         -1,       0 },
+    {"thunderbird",  NULL,      NULL,        0,         0,          0,          0,         -1,       0 },
 };
 
 
@@ -92,7 +94,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[]        = { "dmenu_run", NULL };
 static const char *termcmd[]         = { TERMINAL, NULL };
 static const char *termcmdFloating[] = { TERMINAL, "-c", "floatingTerm", NULL };
-static const char *browser[]         = { "brave", NULL };
+static const char *browser[]         = { "firefox", NULL };
 static const char *email[]           = { "thunderbird", NULL };
 static const char *music[]           = { "spotify-launcher", NULL };
 static const char *notes[]           = { TERMINAL, "-e", "sh", "-c", "cd ~/dox/notes && $EDITOR", NULL};
@@ -187,6 +189,7 @@ static const Key keys[] = {
     { 0,                            XF86XK_AudioNext, spawn,   {.v = mednextcmd } },
     { 0,                            XF86XK_AudioPrev, spawn,   {.v = medprevcmd } },
     { MODKEY,                       XK_Escape, spawn,          {.v = lockscreen } },
+    { MODKEY|ShiftMask,             XK_Escape, spawn,          SHCMD("powermenu")},
     { MODKEY,                       XK_w,      spawn,          {.v = browser } },
     { MODKEY,                       XK_e,      spawn,          {.v = email } },
     { MODKEY,                       XK_m,      spawn,          {.v = music } },
@@ -199,8 +202,8 @@ static const Key keys[] = {
     { MODKEY,                       XK_p,      spawn,          {.v = passwords } },
     { MODKEY|ShiftMask,             XK_w,      spawn,          {.v = wallpaper } },
     { MODKEY|ControlMask,           XK_w,      spawn,          {.v = randomWallpaper } },
-    { MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("screenshot copy") },
-    { 0,                            XK_Print,  spawn,          SHCMD("screenshot save") },
+    { MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("screenshot") },
+    { 0,                            XK_Print,  spawn,          SHCMD("screenshot") },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
