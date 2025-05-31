@@ -43,8 +43,8 @@ static const Rule rules[] = {
     { TERMCLASS,     NULL,       NULL,       0,         0,          1,          0,         -1,      -1 },
     { "floatingTerm",NULL,       NULL,       0,         1,          1,          1,         -1,      -1 }, 
     { NULL,          NULL,       "Event Tester", 0,     0,          0,          1,         -1,      -1 }, /* xev */
-    {"firefox",      NULL,      NULL,        0,         0,          0,          0,         -1,       0 },
-    {"thunderbird",  NULL,      NULL,        0,         0,          0,          0,         -1,       0 },
+    {"firefox",      NULL,      NULL,        0,         0,          0,          0,         -1,      -1 },
+    {"thunderbird",  NULL,      NULL,        0,         0,          0,          0,         -1,      -1 },
 };
 
 
@@ -106,8 +106,8 @@ static const char *mutevol[]         = { "/usr/bin/wpctl",   "set-mute",   "@DEF
 static const char *medplaypausecmd[] = { "playerctl", "play-pause", NULL };
 static const char *mednextcmd[]      = { "playerctl", "next", NULL };
 static const char *medprevcmd[]      = { "playerctl", "previous", NULL };
-static const char *audiosettintgs[]  = { TERMINAL, "-e", "pulsemixer", NULL };
-static const char *btsettintgs[]     = { TERMINAL, "-e", "bluetuith", NULL };
+// static const char *audiosettintgs[]  = { TERMINAL, "-e", "pulsemixer", NULL };
+// static const char *btsettintgs[]     = { TERMINAL, "-e", "bluetuith", NULL };
 static const char *passwords[]       = { "keepassxc", NULL };
 static const char *wallpaper[]       = { "waypaper", NULL };
 static const char *randomWallpaper[] = { "waypaper", "--random", NULL };
@@ -197,8 +197,8 @@ static const Key keys[] = {
     { MODKEY,                       XK_f,      spawn,          {.v = fileManager } },
     { MODKEY,                       XK_c,      spawn,          {.v = communicator } },
     { MODKEY|Mod1Mask,              XK_f,      spawn,          {.v = guiFileManager } },
-    { MODKEY|ControlMask,           XK_s,      spawn,          {.v = audiosettintgs } },
-    { MODKEY|ControlMask,           XK_b,      spawn,          {.v = btsettintgs } },
+    { MODKEY|ControlMask,           XK_s,      spawn,          SHCMD(TERMINAL " -c floatingTerm -e pulsemixer") },
+    { MODKEY|ControlMask,           XK_b,      spawn,          SHCMD(TERMINAL " -c floatingTerm -e bluetuith") },
     { MODKEY,                       XK_p,      spawn,          {.v = passwords } },
     { MODKEY|ShiftMask,             XK_w,      spawn,          {.v = wallpaper } },
     { MODKEY|ControlMask,           XK_w,      spawn,          {.v = randomWallpaper } },
