@@ -1,6 +1,3 @@
-/* See LICENSE file for copyright and license details. */
-
-/* appearance */
 static unsigned int borderpx  = 4;        /* border pixel of windows */
 static unsigned int snap      = 32;       /* snap pixel */
 static unsigned int gappih    =  8;       /* horiz inner gap between windows */
@@ -38,13 +35,13 @@ static const Rule rules[] = {
     /* class         instance    title       tags mask  isfloating  isterminal  noswallow  monitor  borderpx */
     { "Gimp",        NULL,       NULL,       0,         1,          0,          0,         -1,      -1 },
     { "KeePassXC",   NULL,       NULL,       1 << 8,    0,          0,          0,          0,       -1 }, // workspace 9, monitor 1
-    { "discord",     NULL,       NULL,       1 << 3,    0,          0,          0,          1,       -1 }, // workspace 8, monitor 2
+    { "discord",     NULL,       NULL,       1 << 3,    0,          0,          0,          1,       -1 }, // workspace 4, monitor 2
     { "Spotify",     NULL,       NULL,       1 << 1,    0,          0,          0,          1,       -1 }, // workspace 2, monitor 2
     { TERMCLASS,     NULL,       NULL,       0,         0,          1,          0,         -1,      -1 },
     { "floatingTerm",NULL,       NULL,       0,         1,          1,          1,         -1,      -1 }, 
     { NULL,          NULL,       "Event Tester", 0,     0,          0,          1,         -1,      -1 }, /* xev */
-    {"firefox",      NULL,      NULL,        0,         0,          0,          0,         -1,      -1 },
-    {"thunderbird",  NULL,      NULL,        0,         0,          0,          0,         -1,      -1 },
+    {"firefox",      NULL,      NULL,        0,         0,          0,          0,         -1,       0 },
+    {"thunderbird",  NULL,      NULL,        1 << 2,    0,          0,          0,          0,       0 }, 
 };
 
 
@@ -94,7 +91,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[]        = { "dmenu_run", NULL };
 static const char *termcmd[]         = { TERMINAL, NULL };
 static const char *termcmdFloating[] = { TERMINAL, "-c", "floatingTerm", NULL };
-static const char *browser[]         = { "firefox", NULL };
+static const char *browser[]         = { "brave", NULL };
 static const char *email[]           = { "thunderbird", NULL };
 static const char *music[]           = { "spotify-launcher", NULL };
 static const char *notes[]           = { TERMINAL, "-e", "sh", "-c", "cd ~/dox/notes && $EDITOR", NULL};
@@ -118,13 +115,12 @@ static const char *lockscreen[]      = { "betterlockscreen", "-l", NULL };
  * Xresources preferences to load at startup
  */
 ResourcePref resources[] = {
-        // { "font",               STRING,  &font },
-		{ "normbgcolor",        STRING,  &normbgcolor },
-		{ "normbordercolor",    STRING,  &normbordercolor },
-		{ "normfgcolor",        STRING,  &normfgcolor },
-		{ "selbgcolor",         STRING,  &selbgcolor },
-		{ "selbordercolor",     STRING,  &selbordercolor },
-		{ "selfgcolor",         STRING,  &selfgcolor },
+        { "normbgcolor",        STRING,  &normbgcolor },
+        { "normbordercolor",    STRING,  &normbordercolor },
+        { "normfgcolor",        STRING,  &normfgcolor },
+        { "selbgcolor",         STRING,  &selbgcolor },
+        { "selbordercolor",     STRING,  &selbordercolor },
+        { "selfgcolor",         STRING,  &selfgcolor },
 		{ "borderpx",          	INTEGER, &borderpx },
 		{ "snap",          		INTEGER, &snap },
 		{ "showbar",          	INTEGER, &showbar },
