@@ -14,7 +14,9 @@ static int smartgaps          = 1;        /* 1 means no outer gap when there is 
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
 static int swallowfloating    = 1;        /* 1 means swallow floating windows by default */
-static const char *fonts[]            = { "JetBrainsMonoNerdFont:size=16:antialias=true", "NotoColorEmoji:pixelsize=16:antialias=true:autohint=true"};
+static char font[]                  = { "JetBrainsMonoNerdFont:size=16:antialias=true"};
+static char font2[]                 = { "NotoColorEmoji:size=14:antialias=true"};
+static const char *fonts[]          = { font,font2 };
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
@@ -29,19 +31,43 @@ static char *colors[][3] = {
 
 #define TERMINAL "st"
 #define TERMCLASS "St"
+
+typedef struct {
+	const char *name;
+	const void *cmd;
+} Sp;
+const char *spterm[]    = {TERMINAL,"-n","spterm", NULL };
+const char *spsound[]   = {TERMINAL,"-n","spsound","-e","pulsemixer", NULL };
+const char *spbt[]      = {TERMINAL,"-n","spbt","-e","bluetuith", NULL };
+const char *spnotes[]   = {TERMINAL,"-n","spnotes","sh","-c","cd ~/dox/notes && $EDITOR", NULL };
+const char *spfiles[]   = {TERMINAL,"-n","spfiles","-e","yazi", NULL };
+static Sp scratchpads[] = {
+	/* name          cmd  */
+	{"spterm",      spterm  },
+	{"spsound",     spsound },
+	{"spbt",        spbt },
+	{"spnotes",     spnotes },
+	{"spfiles",     spfiles },
+};
+
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
-    /* class         instance    title       tags mask  isfloating  isterminal  noswallow  monitor  borderpx */
-    { "Gimp",        NULL,       NULL,       0,         1,          0,          0,         -1,      -1 },
-    { "KeePassXC",   NULL,       NULL,       1 << 8,    0,          0,          0,          0,       -1 }, // workspace 9, monitor 1
-    { "discord",     NULL,       NULL,       1 << 3,    0,          0,          0,          1,       -1 }, // workspace 4, monitor 2
-    { "Spotify",     NULL,       NULL,       1 << 1,    0,          0,          0,          1,       -1 }, // workspace 2, monitor 2
-    { TERMCLASS,     NULL,       NULL,       0,         0,          1,          0,         -1,      -1 },
-    { "floatingTerm",NULL,       NULL,       0,         1,          1,          1,         -1,      -1 }, 
-    { NULL,          NULL,       "Event Tester", 0,     0,          0,          1,         -1,      -1 }, /* xev */
-    {"firefox",      NULL,      NULL,        0,         0,          0,          0,         -1,       0 },
-    {"thunderbird",  NULL,      NULL,        1 << 2,    0,          0,          0,          0,       0 }, 
+    /* class         instance       title               tags mask  isfloating  isterminal  noswallow  monitor  borderpx */
+    { "Gimp",        NULL,          NULL,               0,         1,          0,          0,         -1,      -1 },
+    { "KeePassXC",   NULL,          NULL,               1 << 8,    0,          0,          0,          0,      -1 }, // workspace 9, monitor 1
+    { "discord",     NULL,          NULL,               1 << 3,    0,          0,          0,          1,      -1 }, // workspace 4, monitor 2
+    { "Spotify",     NULL,          NULL,               1 << 1,    0,          0,          0,          1,      -1 }, // workspace 2, monitor 2
+    { TERMCLASS,     NULL,          NULL,               0,         0,          1,          0,         -1,      -1 },
+    { "floatingTerm",NULL,          NULL,               0,         1,          1,          1,         -1,      -1 }, 
+    { NULL,          NULL,           "Event Tester",    0,         0,          0,          1,         -1,      -1 }, /* xev */
+    {"firefox",      NULL,          NULL,               0,         0,          0,          0,         -1,       0 },
+    {"thunderbird",  NULL,          NULL,               1 << 2,    0,          0,          0,          0,       0 }, // workspace 3, any monitor
+    { NULL,          "spterm",      NULL,               SPTAG(0),  1,          1,          1,         -1,      -1 },
+    { NULL,          "spsound",     NULL,               SPTAG(1),  1,          1,          1,         -1,      -1 },
+    { NULL,          "spbt",        NULL,               SPTAG(2),  1,          1,          1,         -1,      -1 },
+    { NULL,          "spnotes",     NULL,               SPTAG(3),  1,          1,          1,         -1,      -1 },
+    { NULL,          "spfiles",     NULL,               SPTAG(4),  1,          1,          1,         -1,      -1 },
 };
 
 
@@ -90,7 +116,6 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[]        = { "dmenu_run", NULL };
 static const char *termcmd[]         = { TERMINAL, NULL };
-static const char *termcmdFloating[] = { TERMINAL, "-c", "floatingTerm", NULL };
 static const char *browser[]         = { "brave", NULL };
 static const char *email[]           = { "thunderbird", NULL };
 static const char *music[]           = { "spotify-launcher", NULL };
@@ -103,8 +128,6 @@ static const char *mutevol[]         = { "/usr/bin/wpctl",   "set-mute",   "@DEF
 static const char *medplaypausecmd[] = { "playerctl", "play-pause", NULL };
 static const char *mednextcmd[]      = { "playerctl", "next", NULL };
 static const char *medprevcmd[]      = { "playerctl", "previous", NULL };
-// static const char *audiosettintgs[]  = { TERMINAL, "-e", "pulsemixer", NULL };
-// static const char *btsettintgs[]     = { TERMINAL, "-e", "bluetuith", NULL };
 static const char *passwords[]       = { "keepassxc", NULL };
 static const char *wallpaper[]       = { "waypaper", NULL };
 static const char *randomWallpaper[] = { "waypaper", "--random", NULL };
@@ -135,7 +158,6 @@ static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY|ControlMask,           XK_Return, spawn,          {.v = termcmdFloating } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -176,6 +198,11 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
+	{ MODKEY|ControlMask,           XK_Return, togglescratch,  {.ui = 0 } },
+    { MODKEY|ControlMask,           XK_s,      togglescratch,  {.ui = 1 } },
+    { MODKEY|ControlMask,           XK_b,      togglescratch,  {.ui = 2 } },
+    { MODKEY|ControlMask,           XK_n,      togglescratch,  {.ui = 3 } },
+    { MODKEY|ControlMask,           XK_f,      togglescratch,  {.ui = 4 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
     { 0,                            XF86XK_AudioMute,    spawn,          {.v = mutevol } },
@@ -193,8 +220,6 @@ static const Key keys[] = {
     { MODKEY,                       XK_f,      spawn,          {.v = fileManager } },
     { MODKEY,                       XK_c,      spawn,          {.v = communicator } },
     { MODKEY|Mod1Mask,              XK_f,      spawn,          {.v = guiFileManager } },
-    { MODKEY|ControlMask,           XK_s,      spawn,          SHCMD(TERMINAL " -c floatingTerm -e pulsemixer") },
-    { MODKEY|ControlMask,           XK_b,      spawn,          SHCMD(TERMINAL " -c floatingTerm -e bluetuith") },
     { MODKEY,                       XK_p,      spawn,          {.v = passwords } },
     { MODKEY|ShiftMask,             XK_w,      spawn,          {.v = wallpaper } },
     { MODKEY|ControlMask,           XK_w,      spawn,          {.v = randomWallpaper } },
