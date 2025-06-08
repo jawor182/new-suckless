@@ -41,13 +41,15 @@ const char *spsound[]   = {TERMINAL,"-n","spsound","-e","pulsemixer", NULL };
 const char *spbt[]      = {TERMINAL,"-n","spbt","-e","bluetuith", NULL };
 const char *spnotes[]   = {TERMINAL,"-n","spnotes","sh","-c","cd ~/dox/notes && $EDITOR", NULL };
 const char *spfiles[]   = {TERMINAL,"-n","spfiles","-e","yazi", NULL };
+const char *spsysmon[]  = {TERMINAL,"-n","spsysmon","-e","btop", NULL };
 static Sp scratchpads[] = {
-	/* name          cmd  */
-	{"spterm",      spterm  },
-	{"spsound",     spsound },
-	{"spbt",        spbt },
-	{"spnotes",     spnotes },
-	{"spfiles",     spfiles },
+	/* name         cmd      */
+	{"spterm",      spterm   },
+	{"spsound",     spsound  },
+	{"spbt",        spbt     },
+	{"spnotes",     spnotes  },
+	{"spfiles",     spfiles  },
+	{"spsysmon",    spsysmon },
 };
 
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
@@ -68,6 +70,7 @@ static const Rule rules[] = {
     { NULL,          "spbt",        NULL,               SPTAG(2),  1,          1,          1,         -1,      -1 },
     { NULL,          "spnotes",     NULL,               SPTAG(3),  1,          1,          1,         -1,      -1 },
     { NULL,          "spfiles",     NULL,               SPTAG(4),  1,          1,          1,         -1,      -1 },
+    { NULL,          "spsysmon",    NULL,               SPTAG(5),  1,          1,          1,         -1,      -1 },
 };
 
 
@@ -203,6 +206,7 @@ static const Key keys[] = {
     { MODKEY|ControlMask,           XK_b,      togglescratch,  {.ui = 2 } },
     { MODKEY|ControlMask,           XK_n,      togglescratch,  {.ui = 3 } },
     { MODKEY|ControlMask,           XK_f,      togglescratch,  {.ui = 4 } },
+    { MODKEY|ControlMask,           XK_m,      togglescratch,  {.ui = 5 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
     { 0,                            XF86XK_AudioMute,    spawn,          {.v = mutevol } },
