@@ -63,8 +63,8 @@ static const Rule rules[] = {
     { TERMCLASS,      NULL,          NULL,               0,         0,          1,          0,         -1,      -1 },
     { "floatingTerm", NULL,          NULL,               0,         1,          1,          1,         -1,      -1 }, 
     { NULL,           NULL,          "Event Tester",     0,         0,          0,          1,         -1,      -1 }, /* xev */
-    { "firefox",      NULL,          NULL,               0,         0,          0,          0,         -1,       0 },
-    { "thunderbird",  NULL,          NULL,               1 << 2,    0,          0,          0,          0,       0 }, // workspace 3, any monitor
+    { "firefox",      NULL,          NULL,               0,         0,          0,          0,         -1,      -1 },
+    { "thunderbird",  NULL,          NULL,               1 << 2,    0,          0,          0,          0,      -1 }, // workspace 3, any monitor
     { NULL,           "spterm",      NULL,               SPTAG(0),  1,          1,          1,         -1,      -1 },
     { NULL,           "spsound",     NULL,               SPTAG(1),  1,          1,          1,         -1,      -1 },
     { NULL,           "spbt",        NULL,               SPTAG(2),  1,          1,          1,         -1,      -1 },
@@ -119,7 +119,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[]        = { "dmenu_run", NULL };
 static const char *termcmd[]         = { TERMINAL, NULL };
-static const char *browser[]         = { "brave", NULL };
+static const char *browser[]         = { "firefox-nightly", NULL };
 static const char *email[]           = { "thunderbird", NULL };
 static const char *music[]           = { "spotify-launcher", NULL };
 static const char *notes[]           = { TERMINAL, "-e", "sh", "-c", "cd ~/dox/notes && $EDITOR", NULL};
@@ -132,8 +132,7 @@ static const char *medplaypausecmd[] = { "playerctl", "play-pause", NULL };
 static const char *mednextcmd[]      = { "playerctl", "next", NULL };
 static const char *medprevcmd[]      = { "playerctl", "previous", NULL };
 static const char *passwords[]       = { "keepassxc", NULL };
-static const char *wallpaper[]       = { "waypaper", NULL };
-static const char *randomWallpaper[] = { "waypaper", "--random", NULL };
+// static const char *wallpaper[]       = { "waypaper", NULL };
 static const char *communicator[]    = { "discord", NULL };
 static const char *lockscreen[]      = { "betterlockscreen", "-l", NULL };
 
@@ -225,8 +224,9 @@ static const Key keys[] = {
     { MODKEY,                       XK_c,      spawn,          {.v = communicator } },
     { MODKEY|Mod1Mask,              XK_f,      spawn,          {.v = guiFileManager } },
     { MODKEY,                       XK_p,      spawn,          {.v = passwords } },
-    { MODKEY|ShiftMask,             XK_w,      spawn,          {.v = wallpaper } },
-    { MODKEY|ControlMask,           XK_w,      spawn,          {.v = randomWallpaper } },
+    { MODKEY|Mod1Mask,              XK_p,      spawn,          SHCMD("colorpicker") },
+    // { MODKEY|ShiftMask,             XK_w,      spawn,          {.v = wallpaper } },
+    { MODKEY|ControlMask,           XK_w,      spawn,          SHCMD("wallpaper random") },
     { MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("screenshot") },
     { 0,                            XK_Print,  spawn,          SHCMD("screenshot") },
 	TAGKEYS(                        XK_1,                      0)
