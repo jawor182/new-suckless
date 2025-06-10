@@ -55,7 +55,7 @@ dump_cppflags:
 clean:
 	rm -f *.o nsxiv version.h
 
-install-all: install install-desktop install-icon
+install: install install-desktop install-icon
 
 install-desktop:
 	@echo "INSTALL nsxiv.desktop"
