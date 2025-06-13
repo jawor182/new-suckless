@@ -63,8 +63,6 @@ static const Rule rules[] = {
     { TERMCLASS,      NULL,          NULL,               0,         0,          1,          0,         -1,      -1 },
     { "floatingTerm", NULL,          NULL,               0,         1,          1,          1,         -1,      -1 }, 
     { NULL,           NULL,          "Event Tester",     0,         0,          0,          1,         -1,      -1 }, /* xev */
-    { "firefox",      NULL,          NULL,               0,         0,          0,          0,         -1,      -1 },
-    { "thunderbird",  NULL,          NULL,               1 << 2,    0,          0,          0,          0,      -1 }, // workspace 3, any monitor
     { NULL,           "spterm",      NULL,               SPTAG(0),  1,          1,          1,         -1,      -1 },
     { NULL,           "spsound",     NULL,               SPTAG(1),  1,          1,          1,         -1,      -1 },
     { NULL,           "spbt",        NULL,               SPTAG(2),  1,          1,          1,         -1,      -1 },
@@ -120,7 +118,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[]        = { "dmenu_run", NULL };
 static const char *termcmd[]         = { TERMINAL, NULL };
 static const char *browser[]         = { "firefox-nightly", NULL };
-static const char *email[]           = { "thunderbird", NULL };
+static const char *email[]           = { "thunderbird-nightly", NULL };
 static const char *music[]           = { "spotify-launcher", NULL };
 static const char *notes[]           = { TERMINAL, "-e", "sh", "-c", "cd ~/dox/notes && $EDITOR", NULL};
 static const char *fileManager[]     = { TERMINAL, "-e", "yazi", NULL };
