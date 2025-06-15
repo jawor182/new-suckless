@@ -37,6 +37,7 @@ typedef struct {
 	const void *cmd;
 } Sp;
 const char *spterm[]    = {TERMINAL,"-n","spterm", NULL };
+// const char *spterm[]    = {TERMINAL,"-n","spterm","-e","tmux","new","-s","sptmux","-A", NULL };
 const char *spsound[]   = {TERMINAL,"-n","spsound","-e","pulsemixer", NULL };
 const char *spbt[]      = {TERMINAL,"-n","spbt","-e","bluetuith", NULL };
 const char *spnotes[]   = {TERMINAL,"-n","spnotes","sh","-c","cd ~/dox/notes && $EDITOR", NULL };
@@ -55,20 +56,21 @@ static Sp scratchpads[] = {
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
-    /* class          instance       title               tags mask  isfloating  isterminal  noswallow  monitor  borderpx */
-    { "Gimp",         NULL,          NULL,               0,         1,          0,          0,         -1,      -1 },
-    { "KeePassXC",    NULL,          NULL,               1 << 8,    0,          0,          0,          0,      -1 }, // workspace 9, monitor 1
-    { "discord",      NULL,          NULL,               1 << 3,    0,          0,          0,          1,      -1 }, // workspace 4, monitor 2
-    { "Spotify",      NULL,          NULL,               1 << 1,    0,          0,          0,          1,      -1 }, // workspace 2, monitor 2
-    { TERMCLASS,      NULL,          NULL,               0,         0,          1,          0,         -1,      -1 },
-    { "floatingTerm", NULL,          NULL,               0,         1,          1,          1,         -1,      -1 }, 
-    { NULL,           NULL,          "Event Tester",     0,         0,          0,          1,         -1,      -1 }, /* xev */
-    { NULL,           "spterm",      NULL,               SPTAG(0),  1,          1,          1,         -1,      -1 },
-    { NULL,           "spsound",     NULL,               SPTAG(1),  1,          1,          1,         -1,      -1 },
-    { NULL,           "spbt",        NULL,               SPTAG(2),  1,          1,          1,         -1,      -1 },
-    { NULL,           "spnotes",     NULL,               SPTAG(3),  1,          1,          1,         -1,      -1 },
-    { NULL,           "spfiles",     NULL,               SPTAG(4),  1,          1,          1,         -1,      -1 },
-    { NULL,           "spsysmon",    NULL,               SPTAG(5),  1,          1,          1,         -1,      -1 },
+    /* class                         instance       title               tags mask  isfloating  isterminal  noswallow  monitor  borderpx */
+    { "Gimp",                        NULL,          NULL,               0,         0,          0,          0,         -1,      -1 },
+    { "KeePassXC",                   NULL,          NULL,               1 << 8,    0,          0,          0,          0,      -1 }, // workspace 9, monitor 1
+    { "discord",                     NULL,          NULL,               1 << 3,    0,          0,          0,          1,      -1 }, // workspace 4, monitor 2
+    { "thunderbird-nightly",         NULL,          NULL,               1 << 2,    0,          0,          0,          0,      -1 }, // workspace 4, monitor 1
+    { "Spotify",                     NULL,          NULL,               1 << 1,    0,          0,          0,          1,      -1 }, // workspace 2, monitor 2
+    { TERMCLASS,                     NULL,          NULL,               0,         0,          1,          0,         -1,      -1 },
+    { "floatingTerm",                NULL,          NULL,               0,         1,          1,          1,         -1,      -1 }, 
+    { NULL,                          NULL,          "Event Tester",     0,         0,          0,          1,         -1,      -1 }, /* xev */
+    { NULL,                          "spterm",      NULL,               SPTAG(0),  1,          1,          1,         -1,      -1 },
+    { NULL,                          "spsound",     NULL,               SPTAG(1),  1,          1,          1,         -1,      -1 },
+    { NULL,                          "spbt",        NULL,               SPTAG(2),  1,          1,          1,         -1,      -1 },
+    { NULL,                          "spnotes",     NULL,               SPTAG(3),  1,          1,          1,         -1,      -1 },
+    { NULL,                          "spfiles",     NULL,               SPTAG(4),  1,          1,          1,         -1,      -1 },
+    { NULL,                          "spsysmon",    NULL,               SPTAG(5),  1,          1,          1,         -1,      -1 },
 };
 
 
