@@ -1,19 +1,19 @@
-static unsigned int borderpx  = 4;        /* border pixel of windows */
-static unsigned int snap      = 32;       /* snap pixel */
-static unsigned int gappih    =  8;       /* horiz inner gap between windows */
-static unsigned int gappiv    =  8;       /* vert inner gap between windows */
-static unsigned int gappoh    =  8;       /* horiz outer gap between windows and screen edge */
-static unsigned int gappov    =  8;       /* vert outer gap between windows and screen edge */
-static unsigned int systraypinning = 1;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
-static unsigned int systrayonleft = 0;    /* 0: systray in the right corner, >0: systray on left of status text */
-static unsigned int systrayspacing = 2;   /* systray spacing */
-static int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
-static unsigned int systrayiconsize = 32; /* systray icon size in px */
-static int showsystray        = 1;        /* 0 means no systray */
-static int smartgaps          = 1;        /* 1 means no outer gap when there is only one window */
-static int showbar            = 1;        /* 0 means no bar */
-static int topbar             = 1;        /* 0 means bottom bar */
-static int swallowfloating    = 1;        /* 1 means swallow floating windows by default */
+static unsigned int borderpx        = 4;        /* border pixel of windows */
+static unsigned int snap            = 32;       /* snap pixel */
+static unsigned int gappih          = 8;        /* horiz inner gap between windows */
+static unsigned int gappiv          = 8;        /* vert inner gap between windows */
+static unsigned int gappoh          = 8;        /* horiz outer gap between windows and screen edge */
+static unsigned int gappov          = 8;        /* vert outer gap between windows and screen edge */
+static unsigned int systraypinning  = 1;        /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+static unsigned int systrayonleft   = 0;        /* 0: systray in the right corner, >0: systray on left of status text */
+static unsigned int systrayspacing  = 2;        /* systray spacing */
+static int systraypinningfailfirst  = 1;        /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
+static unsigned int systrayiconsize = 32;       /* systray icon size in px */
+static int showsystray              = 1;        /* 0 means no systray */
+static int smartgaps                = 1;        /* 1 means no outer gap when there is only one window */
+static int showbar                  = 1;        /* 0 means no bar */
+static int topbar                   = 1;        /* 0 means bottom bar */
+static int swallowfloating          = 1;        /* 1 means swallow floating windows by default */
 static char font[]                  = { "JetBrainsMonoNerdFont:size=16:antialias=true"};
 static char font2[]                 = { "NotoColorEmoji:size=14:antialias=true"};
 static const char *fonts[]          = { font,font2 };
@@ -37,7 +37,6 @@ typedef struct {
 	const void *cmd;
 } Sp;
 const char *spterm[]    = {TERMINAL,"-n","spterm", NULL };
-// const char *spterm[]    = {TERMINAL,"-n","spterm","-e","tmux","new","-s","sptmux","-A", NULL };
 const char *spsound[]   = {TERMINAL,"-n","spsound","-e","pulsemixer", NULL };
 const char *spbt[]      = {TERMINAL,"-n","spbt","-e","bluetuith", NULL };
 const char *spnotes[]   = {TERMINAL,"-n","spnotes","sh","-c","cd ~/dox/notes && $EDITOR", NULL };
@@ -75,10 +74,10 @@ static const Rule rules[] = {
 
 
 /* layout(s) */
-static float mfact     = 0.5; /* factor of master area size [0.05..0.95] */
-static int nmaster     = 1;    /* number of clients in master area */
-static int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
-static int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
+static float mfact          = 0.5;  /* factor of master area size [0.05..0.95] */
+static int nmaster          = 1;    /* number of clients in master area */
+static int resizehints      = 1;    /* 1 means respect size hints in tiled resizals */
+static int lockfullscreen   = 1;    /* 1 will force focus on the fullscreen window */
 
 #define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
 #include "vanitygaps.c"
@@ -122,17 +121,11 @@ static const char *termcmd[]         = { TERMINAL, NULL };
 static const char *browser[]         = { "firefox-nightly", NULL };
 static const char *email[]           = { "thunderbird-nightly", NULL };
 static const char *music[]           = { "spotify-launcher", NULL };
-static const char *notes[]           = { TERMINAL, "-e", "sh", "-c", "cd ~/dox/notes && $EDITOR", NULL};
+// static const char *notes[]           = { TERMINAL, "-e", "sh", "-c", "cd ~/dox/notes && $EDITOR", NULL};
+static const char *notes[]           = { "obsidian", NULL};
 static const char *fileManager[]     = { TERMINAL, "-e", "yazi", NULL };
 static const char *guiFileManager[]  = { "thunar", NULL };
-static const char *upvol[]           = { "/usr/bin/wpctl",   "set-volume", "@DEFAULT_AUDIO_SINK@",      "5%+",      NULL };
-static const char *downvol[]         = { "/usr/bin/wpctl",   "set-volume", "@DEFAULT_AUDIO_SINK@",      "5%-",      NULL };
-static const char *mutevol[]         = { "/usr/bin/wpctl",   "set-mute",   "@DEFAULT_AUDIO_SINK@",      "toggle",   NULL };
-static const char *medplaypausecmd[] = { "playerctl", "play-pause", NULL };
-static const char *mednextcmd[]      = { "playerctl", "next", NULL };
-static const char *medprevcmd[]      = { "playerctl", "previous", NULL };
 static const char *passwords[]       = { "keepassxc", NULL };
-// static const char *wallpaper[]       = { "waypaper", NULL };
 static const char *communicator[]    = { "discord", NULL };
 static const char *lockscreen[]      = { "betterlockscreen", "-l", NULL };
 
@@ -208,12 +201,12 @@ static const Key keys[] = {
     { MODKEY|ControlMask,           XK_m,      togglescratch,  {.ui = 5 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-    { 0,                            XF86XK_AudioMute,    spawn,          {.v = mutevol } },
-	{ 0,                            XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
-	{ 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = upvol } },
-    { 0,                            XF86XK_AudioPlay, spawn,   {.v = medplaypausecmd } },
-    { 0,                            XF86XK_AudioNext, spawn,   {.v = mednextcmd } },
-    { 0,                            XF86XK_AudioPrev, spawn,   {.v = medprevcmd } },
+    { 0,                            XF86XK_AudioMute,          spawn,   SHCMD("wpctl  set-mute   @DEFAULT_AUDIO_SINK@ toggle") },
+	{ 0,                            XF86XK_AudioLowerVolume,   spawn,   SHCMD("wpctl  set-volume @DEFAULT_AUDIO_SINK@ 5%-"   ) },
+	{ 0,                            XF86XK_AudioRaiseVolume,   spawn,   SHCMD("wpctl  set-volume @DEFAULT_AUDIO_SINK@ 5%+"   ) },
+    { 0,                            XF86XK_AudioPlay,          spawn,   SHCMD("playerctl play-pause") },
+    { 0,                            XF86XK_AudioNext,          spawn,   SHCMD("playerctl next") },
+    { 0,                            XF86XK_AudioPrev,          spawn,   SHCMD("playerctl previous") },
     { MODKEY,                       XK_Escape, spawn,          {.v = lockscreen } },
     { MODKEY|ShiftMask,             XK_Escape, spawn,          SHCMD("powermenu")},
     { MODKEY,                       XK_w,      spawn,          {.v = browser } },
