@@ -32,44 +32,25 @@ static char *colors[][3] = {
 #define TERMINAL "st"
 #define TERMCLASS "St"
 
-typedef struct {
-	const char *name;
-	const void *cmd;
-} Sp;
-const char *spterm[]    = {TERMINAL,"-n","spterm", NULL };
-const char *spsound[]   = {TERMINAL,"-n","spsound","-e","pulsemixer", NULL };
-const char *spbt[]      = {TERMINAL,"-n","spbt","-e","bluetuith", NULL };
-const char *spnotes[]   = {TERMINAL,"-n","spnotes","sh","-c","cd ~/dox/notes && $EDITOR", NULL };
-const char *spfiles[]   = {TERMINAL,"-n","spfiles","-e","yazi", NULL };
-const char *spsysmon[]  = {TERMINAL,"-n","spsysmon","-e","btop", NULL };
-static Sp scratchpads[] = {
-	/* name         cmd      */
-	{"spterm",      spterm   },
-	{"spsound",     spsound  },
-	{"spbt",        spbt     },
-	{"spnotes",     spnotes  },
-	{"spfiles",     spfiles  },
-	{"spsysmon",    spsysmon },
-};
 
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
-    /* class                         instance       title               tags mask  isfloating  isterminal  noswallow  monitor  borderpx */
-    { "Gimp",                        NULL,          NULL,               0,         0,          0,          0,         -1,      -1 },
-    { "KeePassXC",                   NULL,          NULL,               1 << 8,    0,          0,          0,          0,      -1 }, // workspace 9, monitor 1
-    { "discord",                     NULL,          NULL,               1 << 3,    0,          0,          0,          1,      -1 }, // workspace 4, monitor 2
-    { "thunderbird-nightly",         NULL,          NULL,               1 << 2,    0,          0,          0,          0,      -1 }, // workspace 4, monitor 1
-    { "Spotify",                     NULL,          NULL,               1 << 1,    0,          0,          0,          1,      -1 }, // workspace 2, monitor 2
-    { TERMCLASS,                     NULL,          NULL,               0,         0,          1,          0,         -1,      -1 },
-    { "floatingTerm",                NULL,          NULL,               0,         1,          1,          1,         -1,      -1 }, 
-    { NULL,                          NULL,          "Event Tester",     0,         0,          0,          1,         -1,      -1 }, /* xev */
-    { NULL,                          "spterm",      NULL,               SPTAG(0),  1,          1,          1,         -1,      -1 },
-    { NULL,                          "spsound",     NULL,               SPTAG(1),  1,          1,          1,         -1,      -1 },
-    { NULL,                          "spbt",        NULL,               SPTAG(2),  1,          1,          1,         -1,      -1 },
-    { NULL,                          "spnotes",     NULL,               SPTAG(3),  1,          1,          1,         -1,      -1 },
-    { NULL,                          "spfiles",     NULL,               SPTAG(4),  1,          1,          1,         -1,      -1 },
-    { NULL,                          "spsysmon",    NULL,               SPTAG(5),  1,          1,          1,         -1,      -1 },
+    /* class                         instance       title               tags mask  isfloating  isterminal  noswallow  monitor   scratchkey*/
+    { "Gimp",                        NULL,          NULL,               0,         0,          0,          0,         -1,       0    },
+    { "KeePassXC",                   NULL,          NULL,               1 << 8,    0,          0,          0,          0,       0    }, // workspace 9, monitor 1
+    { "discord",                     NULL,          NULL,               1 << 3,    0,          0,          0,          1,       0    }, // workspace 4, monitor 2
+    { "thunderbird-nightly",         NULL,          NULL,               1 << 2,    0,          0,          0,          0,       0    }, // workspace 4, monitor 1
+    { "Spotify",                     NULL,          NULL,               1 << 1,    0,          0,          0,          1,       0    }, // workspace 2, monitor 2
+    { TERMCLASS,                     NULL,          NULL,               0,         0,          1,          0,         -1,       0    },
+    { "floatingTerm",                NULL,          NULL,               0,         1,          1,          1,         -1,       0    }, 
+    { NULL,                          NULL,          "Event Tester",     0,         0,          0,          1,         -1,       0    }, /* xev */
+	{ NULL,                          NULL,          "spterm",           0,         1,          1,          1,         -1,      't' },
+	{ NULL,                          NULL,          "spsound",          0,         1,          1,          1,         -1,      's' },
+	{ NULL,                          NULL,          "spbt",             0,         1,          1,          1,         -1,      'b' },
+	{ NULL,                          NULL,          "spnotes",          0,         1,          1,          1,         -1,      'n' },
+	{ NULL,                          NULL,          "spfiles",          0,         1,          1,          1,         -1,      'f' },
+	{ NULL,                          NULL,          "spsysmon",         0,         1,          1,          1,         -1,      'm' },
 };
 
 
@@ -129,6 +110,15 @@ static const char *passwords[]       = { "keepassxc", NULL };
 static const char *communicator[]    = { "discord", NULL };
 static const char *lockscreen[]      = { "betterlockscreen", "-l", NULL };
 
+/* First arg only serves to match against key in rules*/
+static const char *spterm[]     = {"t", "st", "-t", "spterm", NULL};
+static const char *spsound[]    = {"s", "st", "-t", "spsound","-e","pulsemixer", NULL};
+static const char *spbt[]       = {"b", "st", "-t", "spbt","-e","bluetuith",NULL};
+static const char *spnotes[]    = {"n", "st", "-t", "spnotes","-e","sh","-c","cd ~/dox/notes && $EDITOR", NULL};
+static const char *spfiles[]    = {"f", "st", "-t", "spfiles","-e","yazi", NULL};
+static const char *spsysmon[]   = {"m", "st", "-t", "spsysmon","-e","btop", NULL};
+
+
 /*
  * Xresources preferences to load at startup
  */
@@ -153,6 +143,14 @@ static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY|ControlMask,           XK_Return, togglescratch,  {.v = spterm } },
+	{ MODKEY|ControlMask,           XK_s,      togglescratch,  {.v = spsound } },
+	{ MODKEY|ControlMask,           XK_b,      togglescratch,  {.v = spbt } },
+	{ MODKEY|ControlMask,           XK_n,      togglescratch,  {.v = spnotes } },
+	{ MODKEY|ControlMask,           XK_f,      togglescratch,  {.v = spfiles } },
+	{ MODKEY|ControlMask,           XK_m,      togglescratch,  {.v = spsysmon } },
+	// { MODKEY|ShiftMask,             XK_g,      removescratch,  {.v = spterm } },
+	// { MODKEY|ControlMask,           XK_g,      setscratch,     {.v = spterm } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -193,12 +191,6 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-	{ MODKEY|ControlMask,           XK_Return, togglescratch,  {.ui = 0 } },
-    { MODKEY|ControlMask,           XK_s,      togglescratch,  {.ui = 1 } },
-    { MODKEY|ControlMask,           XK_b,      togglescratch,  {.ui = 2 } },
-    { MODKEY|ControlMask,           XK_n,      togglescratch,  {.ui = 3 } },
-    { MODKEY|ControlMask,           XK_f,      togglescratch,  {.ui = 4 } },
-    { MODKEY|ControlMask,           XK_m,      togglescratch,  {.ui = 5 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
     { 0,                            XF86XK_AudioMute,          spawn,   SHCMD("wpctl  set-mute   @DEFAULT_AUDIO_SINK@ toggle") },
