@@ -5,8 +5,9 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "JetBrainsMonoNerdFont:pixelsize=16:antialias=true:autohint=true";
-static char *font2[] = {"NotoColorEmoji:pixelsize=16:antialias=true:autohint=true"};
+static char *font = "JetBrainsMonoNerdFont=16:antialias=true:autohint=true";
+static char *font2[] = { "NotoColorEmoji:pixelsize=16:antialias=true:autohint=true" };
+
 static int borderpx = 2;
 
 /*
@@ -69,6 +70,18 @@ static unsigned int blinktimeout = 800;
 static unsigned int cursorthickness = 2;
 
 /*
+ * 1: render most of the lines/blocks characters without using the font for
+ *    perfect alignment between cells (U2500 - U259F except dashes/diagonals).
+ *    Bold affects lines thickness if boxdraw_bold is not 0. Italic is ignored.
+ * 0: disable (render all U25XX glyphs normally from the font).
+ */
+const int boxdraw = 0;
+const int boxdraw_bold = 0;
+
+/* braille (U28XX):  1: render as adjacent "pixels",  0: use font */
+const int boxdraw_braille = 0;
+
+/*
  * bell volume. It must be a value between -100 and 100. Use 0 for disabling
  * it
  */
@@ -95,7 +108,7 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* bg opacity */
-float alpha = 0.9;
+float alpha = 0.8;
 
 /* Background opacity */
 float alpha_def;
@@ -139,7 +152,6 @@ unsigned int defaultfg = 256;
 unsigned int defaultbg = 257;
 unsigned int defaultcs = 258;
 static unsigned int defaultrcs = 258;
-
 /*
  * Default shape of cursor
  * 2: Block ("█")
@@ -198,8 +210,8 @@ ResourcePref resources[] = {
 		{ "color13",      STRING,  &colorname[13] },
 		{ "color14",      STRING,  &colorname[14] },
 		{ "color15",      STRING,  &colorname[15] },
-		{ "background",   STRING,  &colorname[257] },
 		{ "foreground",   STRING,  &colorname[256] },
+		{ "background",   STRING,  &colorname[257] },
 		{ "cursorColor",  STRING,  &colorname[258] },
 		{ "termname",     STRING,  &termname },
 		{ "shell",        STRING,  &shell },
@@ -210,6 +222,7 @@ ResourcePref resources[] = {
 		{ "tabspaces",    INTEGER, &tabspaces },
 		{ "borderpx",     INTEGER, &borderpx },
 		{ "cwscale",      FLOAT,   &cwscale },
+    	{ "alpha",        FLOAT,   &alpha },
 		{ "chscale",      FLOAT,   &chscale },
 };
 
@@ -219,13 +232,11 @@ ResourcePref resources[] = {
  */
 static MouseShortcut mshortcuts[] = {
 	/* mask                 button   function        argument       release */
-	{ XK_ANY_MOD,           Button4, kscrollup,      {.i = 1} },
-	{ XK_ANY_MOD,           Button5, kscrolldown,    {.i = 1} },
-	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
-	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
-	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
-	{ ShiftMask,            Button5, ttysend,        {.s = "\033[6;2~"} },
-	{ XK_ANY_MOD,           Button5, ttysend,        {.s = "\005"} },
+    { XK_ANY_MOD, Button4, kscrollup,    {.i = 1}, 0, -1 },
+	{ XK_ANY_MOD, Button5, kscrolldown,  {.i = 1}, 0, -1 },
+	{ XK_ANY_MOD, Button2, selpaste,     {.i = 0}, 1 },
+	{ ShiftMask,  Button4, ttysend,      {.s = "\033[5;2~"} },
+	{ ShiftMask,  Button5, ttysend,      {.s = "\033[6;2~"} },	
 };
 
 /* Internal keyboard shortcuts. */
