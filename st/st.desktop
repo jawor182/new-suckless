@@ -8,5 +8,5 @@ Categories=System;TerminalEmulator;
 
 Name=suckless terminal
 GenericName=suckless terminal
-Comment=st is a simple terminal implementation for X
+Comment=st is a superior terminal implementation for X
 StartupWMClass=st-256color
