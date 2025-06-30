@@ -1177,8 +1177,6 @@ focusmon(const Arg *arg)
 	XWarpPointer(dpy, None, m->barwin, 0, 0, 0, 0, m->mw / 2, m->mh / 2);
 	selmon = m;
 	focus(NULL);
-	if (selmon->sel)
-		XWarpPointer(dpy, None, selmon->sel->win, 0, 0, 0, 0, selmon->sel->w/2, selmon->sel->h/2);
 }
 
 void
@@ -1187,14 +1185,13 @@ focusstack(const Arg *arg)
 	int i = stackpos(arg);
 	Client *c, *p;
 
-	if(i < 0)
+	if(i < 0 || !selmon->sel || (selmon->sel->isfullscreen && lockfullscreen))
 		return;
 
 	for(p = NULL, c = selmon->clients; c && (i || !ISVISIBLE(c));
 	    i -= ISVISIBLE(c) ? 1 : 0, p = c, c = c->next);
 	focus(c ? c : p);
 	restack(selmon);
-	XWarpPointer(dpy, None, c->win, 0, 0, 0, 0, c->w/2, c->h/2);
 }
 
 Atom
@@ -1488,8 +1485,6 @@ c->y = c->mon->my + (c->mon->mh - HEIGHT(c)) / 2;
 	c->mon->sel = c;
 	arrange(c->mon);
 	XMapWindow(dpy, c->win);
-	if (c && c->mon == selmon)
-		XWarpPointer(dpy, None, c->win, 0, 0, 0, 0, c->w/2, c->h/2);
 	if (term)
 		swallow(term, c);
 	focus(NULL);
@@ -2563,9 +2558,6 @@ unmanage(Client *c, int destroyed)
 		arrange(m);
 		focus(NULL);
 		updateclientlist();
-	if (m == selmon && m->sel)
-		XWarpPointer(dpy, None, m->sel->win, 0, 0, 0, 0,
-		             m->sel->w/2, m->sel->h/2);
 	}
 }
 
