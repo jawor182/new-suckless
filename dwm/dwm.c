@@ -1406,88 +1406,97 @@ killclient(const Arg *arg)
 void
 manage(Window w, XWindowAttributes *wa)
 {
-	Client *c, *t = NULL, *term = NULL;
-	Window trans = None;
-	XWindowChanges wc;
+    Client *c, *t = NULL, *term = NULL;
+    Window trans = None;
+    XWindowChanges wc;
 
-	c = ecalloc(1, sizeof(Client));
-	c->win = w;
-	c->pid = winpid(w);
-	/* geometry */
-	c->x = c->oldx = wa->x;
-	c->y = c->oldy = wa->y;
-	c->w = c->oldw = wa->width;
-	c->h = c->oldh = wa->height;
-	c->oldbw = wa->border_width;
-	c->cfact = 1.0;
+    c = ecalloc(1, sizeof(Client));
+    c->win = w;
+    c->pid = winpid(w);
+    /* geometry */
+    c->x = c->oldx = wa->x;
+    c->y = c->oldy = wa->y;
+    c->w = c->oldw = wa->width;
+    c->h = c->oldh = wa->height;
+    c->oldbw = wa->border_width;
+    c->cfact = 1.0;
 
-	updatetitle(c);
-	if (XGetTransientForHint(dpy, w, &trans) && (t = wintoclient(trans))) {
-		c->mon = t->mon;
-		c->tags = t->tags;
-	} else {
-		c->mon = selmon;
-		applyrules(c);
-		term = termforwin(c);
-	}
+    updatetitle(c);
+    if (XGetTransientForHint(dpy, w, &trans) && (t = wintoclient(trans))) {
+        c->mon = t->mon;
+        c->tags = t->tags;
+    } else {
+        c->mon = selmon;
+        applyrules(c);
+        term = termforwin(c);
+    }
 
-	if (c->x + WIDTH(c) > c->mon->wx + c->mon->ww)
-		c->x = c->mon->wx + c->mon->ww - WIDTH(c);
-	if (c->y + HEIGHT(c) > c->mon->wy + c->mon->wh)
-		c->y = c->mon->wy + c->mon->wh - HEIGHT(c);
-	c->x = MAX(c->x, c->mon->wx);
-	c->y = MAX(c->y, c->mon->wy);
-	c->bw = borderpx;
+    if (c->x + WIDTH(c) > c->mon->wx + c->mon->ww)
+        c->x = c->mon->wx + c->mon->ww - WIDTH(c);
+    if (c->y + HEIGHT(c) > c->mon->wy + c->mon->wh)
+        c->y = c->mon->wy + c->mon->wh - HEIGHT(c);
+    c->x = MAX(c->x, c->mon->wx);
+    c->y = MAX(c->y, c->mon->wy);
+    c->bw = borderpx;
 
-	wc.border_width = c->bw;
-	XConfigureWindow(dpy, w, CWBorderWidth, &wc);
-	XSetWindowBorder(dpy, w, scheme[SchemeNorm][ColBorder].pixel);
-	configure(c); /* propagates border_width, if size doesn't change */
-	updatewindowtype(c);
-	updatesizehints(c);
-	updatewmhints(c);
+    wc.border_width = c->bw;
+    XConfigureWindow(dpy, w, CWBorderWidth, &wc);
+    XSetWindowBorder(dpy, w, scheme[SchemeNorm][ColBorder].pixel);
+    configure(c); /* propagates border_width, if size doesn't change */
+    updatewindowtype(c);
+    updatesizehints(c);
+    updatewmhints(c);
 	c->x = c->mon->mx + (c->mon->mw - WIDTH(c)) / 2;
-	{
-		int format;
-		unsigned long *data, n, extra;
-		Monitor *m;
-		Atom atom;
-		if (XGetWindowProperty(dpy, c->win, netatom[NetClientInfo], 0L, 2L, False, XA_CARDINAL,
-				&atom, &format, &n, &extra, (unsigned char **)&data) == Success && n == 2) {
-			c->tags = *data;
-			for (m = mons; m; m = m->next) {
-				if (m->num == *(data+1)) {
-					c->mon = m;
-					break;
-				}
-			}
-		}
-		if (n > 0)
-			XFree(data);
-	}
-	setclienttagprop(c);
+	c->y = c->mon->my + (c->mon->mh - HEIGHT(c)) / 2;
+    {
+        int format;
+        unsigned long *data, n, extra;
+        Monitor *m;
+        Atom atom;
+        if (XGetWindowProperty(dpy, c->win, netatom[NetClientInfo], 0L, 2L, False, XA_CARDINAL,
+                &atom, &format, &n, &extra, (unsigned char **)&data) == Success && n == 2) {
+            c->tags = *data;
+            for (m = mons; m; m = m->next) {
+                if (m->num == *(data+1)) {
+                    c->mon = m;
+                    break;
+                }
+            }
+        }
+        if (n > 0)
+            XFree(data);
+    }
+    setclienttagprop(c);
 
-c->y = c->mon->my + (c->mon->mh - HEIGHT(c)) / 2;
-	XSelectInput(dpy, w, EnterWindowMask|FocusChangeMask|PropertyChangeMask|StructureNotifyMask);
-	grabbuttons(c, 0);
-	if (!c->isfloating)
-		c->isfloating = c->oldstate = trans != None || c->isfixed;
-	if (c->isfloating)
-		XRaiseWindow(dpy, c->win);
-	attachbottom(c);
-	attachstack(c);
-	XChangeProperty(dpy, root, netatom[NetClientList], XA_WINDOW, 32, PropModeAppend,
-		(unsigned char *) &(c->win), 1);
-	XMoveResizeWindow(dpy, c->win, c->x + 2 * sw, c->y, c->w, c->h); /* some windows require this */
-	setclientstate(c, NormalState);
-	if (c->mon == selmon)
-		unfocus(selmon->sel, 0);
-	c->mon->sel = c;
-	arrange(c->mon);
-	XMapWindow(dpy, c->win);
-	if (term)
-		swallow(term, c);
-	focus(NULL);
+    // This line was problematic for centering, it should be handled by layouts or after fullscreen check
+    // c->y = c->mon->my + (c->mon->mh - HEIGHT(c)) / 2;
+
+    XSelectInput(dpy, w, EnterWindowMask|FocusChangeMask|PropertyChangeMask|StructureNotifyMask);
+    grabbuttons(c, 0);
+    if (!c->isfloating)
+        c->isfloating = c->oldstate = trans != None || c->isfixed;
+    if (c->isfloating)
+        XRaiseWindow(dpy, c->win);
+
+    // START OF FIX: Unset fullscreen for the currently selected client if it's fullscreen
+    if(selmon->sel && selmon->sel->isfullscreen && !c->isfloating)
+        setfullscreen(selmon->sel, 0);
+    // END OF FIX
+
+    attachbottom(c); // Or attach(c) if you have that
+    attachstack(c);
+    XChangeProperty(dpy, root, netatom[NetClientList], XA_WINDOW, 32, PropModeAppend,
+        (unsigned char *) &(c->win), 1);
+    XMoveResizeWindow(dpy, c->win, c->x + 2 * sw, c->y, c->w, c->h); /* some windows require this */
+    setclientstate(c, NormalState);
+    if (c->mon == selmon)
+        unfocus(selmon->sel, 0);
+    c->mon->sel = c;
+    arrange(c->mon); // Ensure arrange is called AFTER the fullscreen check
+    XMapWindow(dpy, c->win);
+    if (term)
+        swallow(term, c);
+    focus(NULL); // Focus the newly managed client
 }
 
 void
