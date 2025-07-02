@@ -36,21 +36,22 @@ static char *colors[][3] = {
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
-    /* class                         instance       title               tags mask  isfloating  isterminal  noswallow  monitor   scratchkey*/
-    { "Gimp",                        NULL,          NULL,               0,         0,          0,          0,         -1,       0    },
-    { "KeePassXC",                   NULL,          NULL,               1 << 8,    0,          0,          0,          0,       0    }, // workspace 9, monitor 1
-    { "discord",                     NULL,          NULL,               1 << 3,    0,          0,          0,          1,       0    }, // workspace 4, monitor 2
-    { "thunderbird-nightly",         NULL,          NULL,               1 << 2,    0,          0,          0,          0,       0    }, // workspace 4, monitor 1
-    { "Spotify",                     NULL,          NULL,               1 << 1,    0,          0,          0,          1,       0    }, // workspace 2, monitor 2
-    { TERMCLASS,                     NULL,          NULL,               0,         0,          1,          0,         -1,       0    },
-    { "floatingTerm",                NULL,          NULL,               0,         1,          1,          1,         -1,       0    }, 
-    { NULL,                          NULL,          "Event Tester",     0,         0,          0,          1,         -1,       0    }, /* xev */
-	{ NULL,                          NULL,          "spterm",           0,         1,          1,          1,         -1,      't' },
-	{ NULL,                          NULL,          "spsound",          0,         1,          1,          1,         -1,      's' },
-	{ NULL,                          NULL,          "spbt",             0,         1,          1,          1,         -1,      'b' },
-	{ NULL,                          NULL,          "spnotes",          0,         1,          1,          1,         -1,      'n' },
-	{ NULL,                          NULL,          "spfiles",          0,         1,          1,          1,         -1,      'f' },
-	{ NULL,                          NULL,          "spsysmon",         0,         1,          1,          1,         -1,      'm' },
+    /* class                         instance       title               tags mask  isfloating  isterminal  noswallow  monitor  borderpx  scratchkey*/
+    { "Gimp",                        NULL,          NULL,               0,         0,          0,          0,         -1,     -1,            0   },
+    { "KeePassXC",                   NULL,          NULL,               1 << 8,    0,          0,          0,          0,     -1,            0   }, // workspace 9, monitor 1
+    { "discord",                     NULL,          NULL,               1 << 3,    0,          0,          0,          1,     -1,            0   }, // workspace 4, monitor 2
+    { "thunderbird-nightly",         NULL,          NULL,               1 << 2,    0,          0,          0,          0,     -1,            0   }, // workspace 4, monitor 1
+    { "Spotify",                     NULL,          NULL,               1 << 1,    0,          0,          0,          1,     -1,            0   }, // workspace 2, monitor 2
+    { "librewolf",                   NULL,          NULL,               0,         0,          0,          0,         -1,      0,            0   }, // workspace 2, monitor 2
+    { TERMCLASS,                     NULL,          NULL,               0,         0,          1,          0,         -1,     -1,            0   },
+    { "floatingTerm",                NULL,          NULL,               0,         1,          1,          1,         -1,     -1,            0   }, 
+    { NULL,                          NULL,          "Event Tester",     0,         0,          0,          1,         -1,     -1,            0   }, /* xev */
+	{ NULL,                          NULL,          "spterm",           0,         1,          1,          1,         -1,     -1,           't'   },
+	{ NULL,                          NULL,          "spsound",          0,         1,          1,          1,         -1,     -1,           's'   },
+	{ NULL,                          NULL,          "spbt",             0,         1,          1,          1,         -1,     -1,           'b'   },
+	{ NULL,                          NULL,          "spnotes",          0,         1,          1,          1,         -1,     -1,           'n'   },
+	{ NULL,                          NULL,          "spfiles",          0,         1,          1,          1,         -1,     -1,           'f'   },
+	{ NULL,                          NULL,          "spsysmon",         0,         1,          1,          1,         -1,     -1,           'm'   },
 };
 
 
@@ -102,7 +103,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[]        = { "dmenu_run", NULL };
 static const char *termcmd[]         = { TERMINAL, NULL };
-static const char *browser[]         = { "firefox-nightly", NULL };
+static const char *browser[]         = { "librewolf", NULL };
 static const char *email[]           = { "thunderbird-nightly", NULL };
 static const char *music[]           = { "spotify-launcher", NULL };
 // static const char *notes[]           = { TERMINAL, "-e", "sh", "-c", "cd ~/dox/notes && $EDITOR", NULL};
