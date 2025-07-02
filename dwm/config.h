@@ -153,8 +153,6 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask,           XK_n,      togglescratch,  {.v = spnotes } },
 	{ MODKEY|ControlMask,           XK_f,      togglescratch,  {.v = spfiles } },
 	{ MODKEY|ControlMask,           XK_m,      togglescratch,  {.v = spsysmon } },
-	// { MODKEY|ShiftMask,             XK_g,      removescratch,  {.v = spterm } },
-	// { MODKEY|ControlMask,           XK_g,      setscratch,     {.v = spterm } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	STACKKEYS(MODKEY,                          focus)
 	STACKKEYS(MODKEY|ShiftMask,                push)
@@ -179,8 +177,8 @@ static const Key keys[] = {
 	{ MODKEY|Mod1Mask|ShiftMask,    XK_8,      incrohgaps,     {.i = -1 } },
 	{ MODKEY|Mod1Mask,              XK_9,      incrovgaps,     {.i = +1 } },
 	{ MODKEY|Mod1Mask|ShiftMask,    XK_9,      incrovgaps,     {.i = -1 } },
-	{ MODKEY|Mod1Mask,              XK_0,      togglegaps,     {0} },
-	{ MODKEY|Mod1Mask|ShiftMask,    XK_0,      defaultgaps,    {0} },
+	{ MODKEY,                       XK_g,      togglegaps,     {0} },
+	{ MODKEY|ShiftMask,             XK_g,      defaultgaps,    {0} },
     { MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
@@ -214,6 +212,7 @@ static const Key keys[] = {
     { MODKEY|Mod1Mask,              XK_f,      spawn,          {.v = guiFileManager } },
     { MODKEY,                       XK_p,      spawn,          {.v = passwords } },
     { MODKEY|Mod1Mask,              XK_p,      spawn,          SHCMD("colorpicker") },
+    { MODKEY,                       XK_r,      spawn,          SHCMD("dmenu_run_desktop") },
     { MODKEY|ShiftMask,             XK_w,      spawn,          SHCMD("find $HOME/walls -type f -iname '*.png' | shuf | nsxiv -t -")},
     { MODKEY|ControlMask,           XK_w,      spawn,          SHCMD("wallpaper random") },
     { MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("screenshot") },
