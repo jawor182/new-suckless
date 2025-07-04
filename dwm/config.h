@@ -42,6 +42,7 @@ static const Rule rules[] = {
     { "discord",                     NULL,          NULL,               1 << 3,    0,          0,          0,          1,     -1,            0   }, // workspace 4, monitor 2
     { "thunderbird-nightly",         NULL,          NULL,               1 << 2,    0,          0,          0,          0,     -1,            0   }, // workspace 4, monitor 1
     { "Spotify",                     NULL,          NULL,               1 << 1,    0,          0,          0,          1,     -1,            0   }, // workspace 2, monitor 2
+    { "calibre-gui",                 NULL,          NULL,               1 << 3,    0,          0,          0,          0,     -1,            0   }, // workspace 2, monitor 2
     { "librewolf",                   NULL,          NULL,               0,         0,          0,          0,         -1,      0,            0   }, // workspace 2, monitor 2
     { TERMCLASS,                     NULL,          NULL,               0,         0,          1,          0,         -1,     -1,            0   },
     { "floatingTerm",                NULL,          NULL,               0,         1,          1,          1,         -1,     -1,            0   }, 
