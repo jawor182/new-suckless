@@ -48,7 +48,7 @@ static const Rule rules[] = {
     { "floatingTerm",                NULL,          NULL,               0,         1,          1,          1,         -1,     -1,            0   }, 
     { NULL,                          NULL,          "Event Tester",     0,         0,          0,          1,         -1,     -1,            0   }, /* xev */
 	{ NULL,                          NULL,          "spterm",           0,         1,          1,          1,         -1,     -1,           't'   },
-	{ NULL,                          NULL,          "spsound",          0,         1,          1,          1,         -1,     -1,           's'   },
+	{ NULL,                          NULL,          "pulsemixer",       0,         1,          1,          1,         -1,     -1,           's'   },
 	{ NULL,                          NULL,          "spbt",             0,         1,          1,          1,         -1,     -1,           'b'   },
 	{ NULL,                          NULL,          "spnotes",          0,         1,          1,          1,         -1,     -1,           'n'   },
 	{ NULL,                          NULL,          "spfiles",          0,         1,          1,          1,         -1,     -1,           'f'   },
@@ -104,7 +104,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[]        = { "dmenu_run", NULL };
 static const char *termcmd[]         = { TERMINAL, NULL };
-static const char *browser[]         = { "librewolf", NULL };
+static const char *browser[]         = { "brave", NULL };
 static const char *email[]           = { "thunderbird-nightly", NULL };
 static const char *music[]           = { "spotify-launcher", NULL };
 // static const char *notes[]           = { TERMINAL, "-e", "sh", "-c", "cd ~/dox/notes && $EDITOR", NULL};
@@ -117,7 +117,7 @@ static const char *lockscreen[]      = { "betterlockscreen", "-l", NULL };
 
 /* First arg only serves to match against key in rules*/
 static const char *spterm[]     = {"t", "st", "-t", "spterm", NULL};
-static const char *spsound[]    = {"s", "st", "-t", "spsound","-e","pulsemixer", NULL};
+static const char *spsound[]    = {"s", "st", "-t", "pulsemixer","-e","pulsemixer", NULL};
 static const char *spbt[]       = {"b", "st", "-t", "spbt","-e","bluetuith",NULL};
 static const char *spnotes[]    = {"n", "st", "-t", "spnotes","-e","sh","-c","cd ~/dox/notes && $EDITOR", NULL};
 static const char *spfiles[]    = {"f", "st", "-t", "spfiles","-e","yazi", NULL};
