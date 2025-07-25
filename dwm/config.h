@@ -40,8 +40,8 @@ static const Rule rules[] = {
     { "Gimp",                        NULL,          NULL,               0,         0,          0,          0,         -1,     -1,            0   },
     { "KeePassXC",                   NULL,          NULL,               1 << 8,    0,          0,          0,          0,     -1,            0   }, // workspace 9, monitor 1
     { "discord",                     NULL,          NULL,               1 << 3,    0,          0,          0,          1,     -1,            0   }, // workspace 4, monitor 2
-    { "thunderbird-nightly",         NULL,          NULL,               1 << 2,    0,          0,          0,          0,     -1,            0   }, // workspace 4, monitor 1
-    { "Spotify",                     NULL,          NULL,               1 << 1,    0,          0,          0,          1,     -1,            0   }, // workspace 2, monitor 2
+    { "thunderbird",                 NULL,          NULL,               1 << 2,    0,          0,          0,          0,     -1,            0   }, // workspace 4, monitor 1
+    { "musicterm",                   NULL,          NULL,               1 << 1,    0,          0,          0,          1,     -1,            0   }, // workspace 2, monitor 2
     { "calibre-gui",                 NULL,          NULL,               1 << 3,    0,          0,          0,          0,     -1,            0   }, // workspace 2, monitor 2
     { "librewolf",                   NULL,          NULL,               0,         0,          0,          0,         -1,      0,            0   }, // workspace 2, monitor 2
     { TERMCLASS,                     NULL,          NULL,               0,         0,          1,          0,         -1,     -1,            0   },
@@ -104,9 +104,9 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[]        = { "dmenu_run", NULL };
 static const char *termcmd[]         = { TERMINAL, NULL };
-static const char *browser[]         = { "brave", NULL };
-static const char *email[]           = { "thunderbird-nightly", NULL };
-static const char *music[]           = { "spotify-launcher", NULL };
+static const char *browser[]         = { "librewolf", NULL };
+static const char *email[]           = { "thunderbird", NULL };
+static const char *music[]           = { TERMINAL,"-c","musicterm","-e","rmpc", NULL };
 // static const char *notes[]           = { TERMINAL, "-e", "sh", "-c", "cd ~/dox/notes && $EDITOR", NULL};
 static const char *notes[]           = { "obsidian", NULL};
 static const char *fileManager[]     = { TERMINAL, "-e", "yazi", NULL };
@@ -218,6 +218,9 @@ static const Key keys[] = {
     { MODKEY|ControlMask,           XK_w,      spawn,          SHCMD("wallpaper random") },
     { MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("screenshot") },
     { 0,                            XK_Print,  spawn,          SHCMD("screenshot") },
+    { MODKEY|Mod1Mask,              XK_space,  spawn,          SHCMD("playerctl -p mpd play-pause") },
+    { MODKEY|Mod1Mask,              XK_period, spawn,          SHCMD("playerctl -p mpd next") },
+    { MODKEY|Mod1Mask,              XK_comma,  spawn,          SHCMD("playerctl -p mpd previous") },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
