@@ -42,8 +42,7 @@ static const Rule rules[] = {
     { "discord",                     NULL,          NULL,               1 << 3,    0,          0,          0,          1,     -1,            0   }, // workspace 4, monitor 2
     { "thunderbird",                 NULL,          NULL,               1 << 2,    0,          0,          0,          0,     -1,            0   }, // workspace 4, monitor 1
     { "musicterm",                   NULL,          NULL,               1 << 1,    0,          0,          0,          1,     -1,            0   }, // workspace 2, monitor 2
-    { "calibre-gui",                 NULL,          NULL,               1 << 3,    0,          0,          0,          0,     -1,            0   }, // workspace 2, monitor 2
-    { "librewolf",                   NULL,          NULL,               0,         0,          0,          0,         -1,      0,            0   }, // workspace 2, monitor 2
+    { "librewolf",                   NULL,          NULL,               0,         0,          0,          0,         -1,     -1,            0   }, // workspace 2, monitor 2
     { TERMCLASS,                     NULL,          NULL,               0,         0,          1,          0,         -1,     -1,            0   },
     { "floatingTerm",                NULL,          NULL,               0,         1,          1,          1,         -1,     -1,            0   }, 
     { NULL,                          NULL,          "Event Tester",     0,         0,          0,          1,         -1,     -1,            0   }, /* xev */
@@ -104,7 +103,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[]        = { "dmenu_run", NULL };
 static const char *termcmd[]         = { TERMINAL, NULL };
-static const char *browser[]         = { "librewolf", NULL };
+static const char *browser[]         = { "brave", NULL };
 static const char *email[]           = { "thunderbird", NULL };
 static const char *music[]           = { TERMINAL,"-c","musicterm","-e","rmpc", NULL };
 // static const char *notes[]           = { TERMINAL, "-e", "sh", "-c", "cd ~/dox/notes && $EDITOR", NULL};
@@ -230,7 +229,8 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_q, quit,              {0}},
+	{ MODKEY|ShiftMask,             XK_q,      quit,           {0}},
+	{ MODKEY|ControlMask,           XK_r,      quit,           {1} }, 
 };
 
 /* button definitions */
