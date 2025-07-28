@@ -179,7 +179,6 @@ typedef struct {
 	int isterminal;
 	int noswallow;
 	int monitor;
-	int bw;
 	const char scratchkey;
 } Rule;
 
@@ -397,7 +396,6 @@ applyrules(Client *c)
 	c->isfloating = 0;
 	c->tags = 0;
 	c->scratchkey = 0;
-	c->bw = borderpx;
 	XGetClassHint(dpy, c->win, &ch);
 	class    = ch.res_class ? ch.res_class : broken;
 	instance = ch.res_name  ? ch.res_name  : broken;
@@ -413,8 +411,6 @@ applyrules(Client *c)
 			c->isfloating = r->isfloating;
 			c->tags |= r->tags;
 			c->scratchkey = r->scratchkey;
-			if (r->bw != -1)
-				c->bw = r->bw;
 			for (m = mons; m && m->num != r->monitor; m = m->next);
 			if (m)
 				c->mon = m;
@@ -1445,6 +1441,7 @@ manage(Window w, XWindowAttributes *wa)
         c->y = c->mon->wy + c->mon->wh - HEIGHT(c);
     c->x = MAX(c->x, c->mon->wx);
     c->y = MAX(c->y, c->mon->wy);
+	c->bw = borderpx;
 
     wc.border_width = c->bw;
     XConfigureWindow(dpy, w, CWBorderWidth, &wc);

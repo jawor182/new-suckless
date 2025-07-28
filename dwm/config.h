@@ -36,22 +36,22 @@ static char *colors[][3] = {
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
-    /* class                         instance       title               tags mask  isfloating  isterminal  noswallow  monitor  borderpx  scratchkey*/
-    { "Gimp",                        NULL,          NULL,               0,         0,          0,          0,         -1,     -1,            0   },
-    { "KeePassXC",                   NULL,          NULL,               1 << 8,    0,          0,          0,          0,     -1,            0   }, // workspace 9, monitor 1
-    { "discord",                     NULL,          NULL,               1 << 3,    0,          0,          0,          1,     -1,            0   }, // workspace 4, monitor 2
-    { "thunderbird",                 NULL,          NULL,               1 << 2,    0,          0,          0,          0,     -1,            0   }, // workspace 4, monitor 1
-    { "musicterm",                   NULL,          NULL,               1 << 1,    0,          0,          0,          1,     -1,            0   }, // workspace 2, monitor 2
-    { "librewolf",                   NULL,          NULL,               0,         0,          0,          0,         -1,     -1,            0   }, // workspace 2, monitor 2
-    { TERMCLASS,                     NULL,          NULL,               0,         0,          1,          0,         -1,     -1,            0   },
-    { "floatingTerm",                NULL,          NULL,               0,         1,          1,          1,         -1,     -1,            0   }, 
-    { NULL,                          NULL,          "Event Tester",     0,         0,          0,          1,         -1,     -1,            0   }, /* xev */
-	{ NULL,                          NULL,          "spterm",           0,         1,          1,          1,         -1,     -1,           't'   },
-	{ NULL,                          NULL,          "pulsemixer",       0,         1,          1,          1,         -1,     -1,           's'   },
-	{ NULL,                          NULL,          "spbt",             0,         1,          1,          1,         -1,     -1,           'b'   },
-	{ NULL,                          NULL,          "spnotes",          0,         1,          1,          1,         -1,     -1,           'n'   },
-	{ NULL,                          NULL,          "spfiles",          0,         1,          1,          1,         -1,     -1,           'f'   },
-	{ NULL,                          NULL,          "spsysmon",         0,         1,          1,          1,         -1,     -1,           'm'   },
+    /* class                         instance       title               tags mask  isfloating  isterminal  noswallow  monitor  scratchkey*/
+    { "Gimp",                        NULL,          NULL,               0,         0,          0,          0,         -1,       0   },
+    { "KeePassXC",                   NULL,          NULL,               1 << 8,    0,          0,          0,          0,       0   }, // workspace 9, monitor 1
+    { "discord",                     NULL,          NULL,               1 << 3,    0,          0,          0,          1,       0   }, // workspace 4, monitor 2
+    { "thunderbird",                 NULL,          NULL,               1 << 2,    0,          0,          0,          0,       0   }, // workspace 4, monitor 1
+    { "musicterm",                   NULL,          NULL,               1 << 1,    0,          0,          0,          1,       0   }, // workspace 2, monitor 2
+    { "librewolf",                   NULL,          NULL,               0,         0,          0,          0,         -1,       0   }, // workspace 2, monitor 2
+    { TERMCLASS,                     NULL,          NULL,               0,         0,          1,          0,         -1,       0   },
+    { "floatingTerm",                NULL,          NULL,               0,         1,          1,          1,         -1,       0   }, 
+    { NULL,                          NULL,          "Event Tester",     0,         0,          0,          1,         -1,       0   }, /* xev */
+	{ NULL,                          NULL,          "spterm",           0,         1,          1,          1,         -1,      't'   },
+	{ NULL,                          NULL,          "pulsemixer",       0,         1,          1,          1,         -1,      's'   },
+	{ NULL,                          NULL,          "spbt",             0,         1,          1,          1,         -1,      'b'   },
+	{ NULL,                          NULL,          "spnotes",          0,         1,          1,          1,         -1,      'n'   },
+	{ NULL,                          NULL,          "spfiles",          0,         1,          1,          1,         -1,      'f'   },
+	{ NULL,                          NULL,          "spsysmon",         0,         1,          1,          1,         -1,      'm'   },
 };
 
 
@@ -109,8 +109,9 @@ static const char *music[]           = { TERMINAL,"-c","musicterm","-e","rmpc", 
 // static const char *notes[]           = { TERMINAL, "-e", "sh", "-c", "cd ~/dox/notes && $EDITOR", NULL};
 static const char *notes[]           = { "obsidian", NULL};
 static const char *fileManager[]     = { TERMINAL, "-e", "yazi", NULL };
-static const char *guiFileManager[]  = { "thunar", NULL };
+static const char *guiFileManager[]  = { "pcmanfm-qt", NULL };
 static const char *passwords[]       = { "keepassxc", NULL };
+static const char *books[]           = { "calibre", NULL };
 static const char *communicator[]    = { "discord", NULL };
 static const char *lockscreen[]      = { "betterlockscreen", "-l", NULL };
 
@@ -211,6 +212,7 @@ static const Key keys[] = {
     { MODKEY,                       XK_c,      spawn,          {.v = communicator } },
     { MODKEY|Mod1Mask,              XK_f,      spawn,          {.v = guiFileManager } },
     { MODKEY,                       XK_p,      spawn,          {.v = passwords } },
+    { MODKEY|ShiftMask,             XK_b,      spawn,          {.v = books } },
     { MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("colorpicker") },
     { MODKEY,                       XK_r,      spawn,          SHCMD("dmenu_run_desktop") },
     { MODKEY|ShiftMask,             XK_w,      spawn,          SHCMD("find $HOME/walls -type f -iname '*.png' | shuf | nsxiv -t -")},
