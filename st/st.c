@@ -35,7 +35,7 @@
 #define ESC_ARG_SIZ   16
 #define STR_BUF_SIZ   ESC_BUF_SIZ
 #define STR_ARG_SIZ   ESC_ARG_SIZ
-#define HISTSIZE      10000
+#define HISTSIZE      2000
 
 /* macros */
 #define IS_SET(flag)		((term.mode & (flag)) != 0)
@@ -194,6 +194,8 @@ static void tputc(Rune);
 static void treset(void);
 static void tscrollup(int, int, int);
 static void tscrolldown(int, int, int);
+void kscrolldown(const Arg *);
+void kscrollup(const Arg *);
 static void tsetattr(const int *, int);
 static void tsetchar(Rune, const Glyph *, int, int);
 static void tsetdirt(int, int);
@@ -1059,11 +1061,6 @@ tnew(int col, int row)
 	treset();
 }
 
-int tisaltscr(void)
-{
-	return IS_SET(MODE_ALTSCREEN);
-}
-
 void
 tswapscreen(void)
 {
@@ -1170,19 +1167,21 @@ tscrollup(int orig, int n, int copyhist)
 void
 selscroll(int orig, int n)
 {
-	if (sel.ob.x == -1)
+	if (sel.ob.x == -1 || sel.alt != IS_SET(MODE_ALTSCREEN))
 		return;
-	/* Always shift selection vertically */
-	sel.ob.y += n;
-	sel.oe.y += n;
 
-	/* If selection is now fully out of visible region, clear */
-	if (sel.ob.y < 0 && sel.oe.y < 0)
+	if (BETWEEN(sel.nb.y, orig, term.bot) != BETWEEN(sel.ne.y, orig, term.bot)) {
 		selclear();
-	else if (sel.ob.y > term.bot && sel.oe.y > term.bot)
-		selclear();
-	else
-		selnormalize();
+	} else if (BETWEEN(sel.nb.y, orig, term.bot)) {
+		sel.ob.y += n;
+		sel.oe.y += n;
+		if (sel.ob.y < term.top || sel.ob.y > term.bot ||
+		    sel.oe.y < term.top || sel.oe.y > term.bot) {
+			selclear();
+		} else {
+			selnormalize();
+		}
+	}
 }
 
 void
@@ -1289,6 +1288,9 @@ tsetchar(Rune u, const Glyph *attr, int x, int y)
 	term.dirty[y] = 1;
 	term.line[y][x] = *attr;
 	term.line[y][x].u = u;
+
+	if (isboxdraw(u))
+		term.line[y][x].mode |= ATTR_BOXDRAW;
 }
 
 void
@@ -1500,6 +1502,12 @@ tsetattr(const int *attr, int l)
 			break;
 		case 49:
 			term.c.attr.bg = defaultbg;
+			break;
+		case 58:
+			/* This starts a sequence to change the color of
+			 * "underline" pixels. We don't support that and
+			 * instead eat up a following "5;n" or "2;r;g;b". */
+			tdefcolor(attr, &i, l);
 			break;
 		default:
 			if (BETWEEN(attr[i], 30, 37)) {
@@ -2825,8 +2833,8 @@ draw(void)
 		cx--;
 
 	drawregion(0, 0, term.col, term.row);
-	if (term.scr == 0)
-    	xdrawcursor(cx, term.c.y, term.line[term.c.y][cx],
+    if (term.scr == 0)
+    xdrawcursor(cx, term.c.y, term.line[term.c.y][cx],
 				term.ocx, term.ocy, term.line[term.ocy][term.ocx],
 				term.line[term.ocy], term.col);
 	term.ocx = cx;
