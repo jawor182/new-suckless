@@ -116,12 +116,12 @@ static const char *communicator[]    = { "discord", NULL };
 static const char *lockscreen[]      = { "betterlockscreen", "-l", NULL };
 
 /* First arg only serves to match against key in rules*/
-static const char *spterm[]     = {"t", "st", "-t", "spterm", NULL};
-static const char *spsound[]    = {"s", "st", "-t", "pulsemixer","-e","pulsemixer", NULL};
-static const char *spbt[]       = {"b", "st", "-t", "spbt","-e","bluetuith",NULL};
-static const char *spnotes[]    = {"n", "st", "-t", "spnotes","-e","sh","-c","cd ~/dox/notes && $EDITOR", NULL};
-static const char *spfiles[]    = {"f", "st", "-t", "spfiles","-e","yazi", NULL};
-static const char *spsysmon[]   = {"m", "st", "-t", "spsysmon","-e","btop", NULL};
+static const char *spterm[]     = {"t", TERMINAL, "-t", "spterm", NULL};
+static const char *spsound[]    = {"s", TERMINAL, "-t", "pulsemixer","-e","pulsemixer", NULL};
+static const char *spbt[]       = {"b", TERMINAL, "-t", "spbt","-e","bluetuith",NULL};
+static const char *spnotes[]    = {"n", TERMINAL, "-t", "spnotes","-e","sh","-c","cd ~/dox/notes && $EDITOR", NULL};
+static const char *spfiles[]    = {"f", TERMINAL, "-t", "spfiles","-e","yazi", NULL};
+static const char *spsysmon[]   = {"m", TERMINAL, "-t", "spsysmon","-e","btop", NULL};
 
 
 /*
@@ -218,6 +218,7 @@ static const Key keys[] = {
     { MODKEY|ShiftMask,             XK_w,      spawn,          SHCMD("find $HOME/walls -type f -iname '*.png' | shuf | nsxiv -t -")},
     { MODKEY|ControlMask,           XK_w,      spawn,          SHCMD("wallpaper random") },
     { MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("screenshot") },
+    { MODKEY|ShiftMask,             XK_m,      spawn,          SHCMD("boomer") },
     { 0,                            XK_Print,  spawn,          SHCMD("screenshot") },
     { MODKEY|Mod1Mask,              XK_space,  spawn,          SHCMD("playerctl -p mpd play-pause") },
     { MODKEY|Mod1Mask,              XK_period, spawn,          SHCMD("playerctl -p mpd next") },
