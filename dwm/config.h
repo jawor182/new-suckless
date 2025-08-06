@@ -41,7 +41,6 @@ static const Rule rules[] = {
     { "KeePassXC",                   NULL,          NULL,               1 << 8,    0,          0,          0,          0,       0   }, // workspace 9, monitor 1
     { "discord",                     NULL,          NULL,               1 << 3,    0,          0,          0,          1,       0   }, // workspace 4, monitor 2
     { "thunderbird",                 NULL,          NULL,               1 << 2,    0,          0,          0,          0,       0   }, // workspace 4, monitor 1
-    { "musicterm",                   NULL,          NULL,               1 << 1,    0,          0,          0,          1,       0   }, // workspace 2, monitor 2
     { "librewolf",                   NULL,          NULL,               0,         0,          0,          0,         -1,       0   }, // workspace 2, monitor 2
     { TERMCLASS,                     NULL,          NULL,               0,         0,          1,          0,         -1,       0   },
     { "floatingTerm",                NULL,          NULL,               0,         1,          1,          1,         -1,       0   }, 
@@ -51,7 +50,8 @@ static const Rule rules[] = {
 	{ NULL,                          NULL,          "spbt",             0,         1,          1,          1,         -1,      'b'   },
 	{ NULL,                          NULL,          "spnotes",          0,         1,          1,          1,         -1,      'n'   },
 	{ NULL,                          NULL,          "spfiles",          0,         1,          1,          1,         -1,      'f'   },
-	{ NULL,                          NULL,          "spsysmon",         0,         1,          1,          1,         -1,      'm'   },
+	{ NULL,                          NULL,          "spsysmon",         0,         1,          1,          1,         -1,      't'   },
+	{ NULL,                          NULL,          "spmusic",          0,         1,          1,          1,         -1,      'm'   },
 };
 
 
@@ -105,8 +105,6 @@ static const char *dmenucmd[]        = { "dmenu_run", NULL };
 static const char *termcmd[]         = { TERMINAL, NULL };
 static const char *browser[]         = { "librewolf", NULL };
 static const char *email[]           = { "thunderbird", NULL };
-static const char *music[]           = { TERMINAL,"-c","musicterm","-e","rmpc", NULL };
-// static const char *notes[]           = { TERMINAL, "-e", "sh", "-c", "cd ~/dox/notes && $EDITOR", NULL};
 static const char *notes[]           = { "obsidian", NULL};
 static const char *fileManager[]     = { TERMINAL, "-e", "yazi", NULL };
 static const char *guiFileManager[]  = { "pcmanfm-qt", NULL };
@@ -121,7 +119,8 @@ static const char *spsound[]    = {"s", TERMINAL, "-t", "pulsemixer","-e","pulse
 static const char *spbt[]       = {"b", TERMINAL, "-t", "spbt","-e","bluetuith",NULL};
 static const char *spnotes[]    = {"n", TERMINAL, "-t", "spnotes","-e","sh","-c","cd ~/dox/notes && $EDITOR", NULL};
 static const char *spfiles[]    = {"f", TERMINAL, "-t", "spfiles","-e","yazi", NULL};
-static const char *spsysmon[]   = {"m", TERMINAL, "-t", "spsysmon","-e","btop", NULL};
+static const char *spsysmon[]   = {"t", TERMINAL, "-t", "spsysmon","-e","btop", NULL};
+static const char *spmusic[]    = {"m", TERMINAL, "-t", "spmusic","-e","rmpc", NULL};
 
 
 /*
@@ -153,7 +152,8 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask,           XK_b,      togglescratch,  {.v = spbt } },
 	{ MODKEY|ControlMask,           XK_n,      togglescratch,  {.v = spnotes } },
 	{ MODKEY|ControlMask,           XK_f,      togglescratch,  {.v = spfiles } },
-	{ MODKEY|ControlMask,           XK_m,      togglescratch,  {.v = spsysmon } },
+	{ MODKEY|ControlMask,           XK_t,      togglescratch,  {.v = spsysmon } },
+	{ MODKEY,                       XK_m,      togglescratch,  {.v = spmusic } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	STACKKEYS(MODKEY,                          focus)
 	STACKKEYS(MODKEY|ShiftMask,                push)
@@ -206,7 +206,6 @@ static const Key keys[] = {
     { MODKEY|ShiftMask,             XK_Escape, spawn,          SHCMD("powermenu")},
     { MODKEY,                       XK_w,      spawn,          {.v = browser } },
     { MODKEY,                       XK_e,      spawn,          {.v = email } },
-    { MODKEY,                       XK_m,      spawn,          {.v = music } },
     { MODKEY,                       XK_n,      spawn,          {.v = notes } },
     { MODKEY,                       XK_f,      spawn,          {.v = fileManager } },
     { MODKEY,                       XK_c,      spawn,          {.v = communicator } },
