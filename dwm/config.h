@@ -50,7 +50,7 @@ static const Rule rules[] = {
 	{ NULL,                          NULL,          "spbt",             0,         1,          1,          1,         -1,      'b'   },
 	{ NULL,                          NULL,          "spnotes",          0,         1,          1,          1,         -1,      'n'   },
 	{ NULL,                          NULL,          "spfiles",          0,         1,          1,          1,         -1,      'f'   },
-	{ NULL,                          NULL,          "spsysmon",         0,         1,          1,          1,         -1,      't'   },
+	{ NULL,                          NULL,          "spsysmon",         0,         1,          1,          1,         -1,      'h'   },
 	{ NULL,                          NULL,          "spmusic",          0,         1,          1,          1,         -1,      'm'   },
 };
 
@@ -119,7 +119,7 @@ static const char *spsound[]    = {"s", TERMINAL, "-t", "pulsemixer","-e","pulse
 static const char *spbt[]       = {"b", TERMINAL, "-t", "spbt","-e","bluetuith",NULL};
 static const char *spnotes[]    = {"n", TERMINAL, "-t", "spnotes","-e","sh","-c","cd ~/dox/notes && $EDITOR", NULL};
 static const char *spfiles[]    = {"f", TERMINAL, "-t", "spfiles","-e","yazi", NULL};
-static const char *spsysmon[]   = {"t", TERMINAL, "-t", "spsysmon","-e","btop", NULL};
+static const char *spsysmon[]   = {"h", TERMINAL, "-t", "spsysmon","-e","btop", NULL};
 static const char *spmusic[]    = {"m", TERMINAL, "-t", "spmusic","-e","rmpc", NULL};
 
 
