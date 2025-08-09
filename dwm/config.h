@@ -42,7 +42,6 @@ static const Rule rules[] = {
     { "discord",                     NULL,          NULL,               1 << 3,    0,          0,          0,          1,       0   }, // workspace 4, monitor 2
     { "thunderbird",                 NULL,          NULL,               1 << 2,    0,          0,          0,          0,       0   }, // workspace 4, monitor 1
     { TERMCLASS,                     NULL,          NULL,               0,         0,          1,          0,         -1,       0   },
-    { "floatingTerm",                NULL,          NULL,               0,         1,          1,          1,         -1,       0   }, 
     { NULL,                          NULL,          "Event Tester",     0,         0,          0,          1,         -1,       0   }, /* xev */
 	{ NULL,                          NULL,          "spterm",           0,         1,          1,          1,         -1,      't'   },
 	{ NULL,                          NULL,          "pulsemixer",       0,         1,          1,          1,         -1,      's'   },
