@@ -42,6 +42,7 @@ static const Rule rules[] = {
     { "discord",                     NULL,          NULL,               1 << 3,    0,          0,          0,          1,       0   }, // workspace 4, monitor 2
     { "thunderbird",                 NULL,          NULL,               1 << 2,    0,          0,          0,          0,       0   }, // workspace 4, monitor 1
     { TERMCLASS,                     NULL,          NULL,               0,         0,          1,          0,         -1,       0   },
+    { "floatingTerm",                NULL,          NULL,               0,         1,          1,          0,         -1,       0   },
     { NULL,                          NULL,          "Event Tester",     0,         0,          0,          1,         -1,       0   }, /* xev */
 	{ NULL,                          NULL,          "spterm",           0,         1,          1,          1,         -1,      't'   },
 	{ NULL,                          NULL,          "pulsemixer",       0,         1,          1,          1,         -1,      's'   },
@@ -50,6 +51,7 @@ static const Rule rules[] = {
 	{ NULL,                          NULL,          "spfiles",          0,         1,          1,          1,         -1,      'f'   },
 	{ NULL,                          NULL,          "spsysmon",         0,         1,          1,          1,         -1,      'h'   },
 	{ NULL,                          NULL,          "spmusic",          0,         1,          1,          1,         -1,      'm'   },
+	{ NULL,                          NULL,          "sprss",            0,         1,          1,          1,         -1,      'r'   },
 };
 
 
@@ -119,6 +121,7 @@ static const char *spnotes[]    = {"n", TERMINAL, "-t", "spnotes","-e","sh","-c"
 static const char *spfiles[]    = {"f", TERMINAL, "-t", "spfiles","-e","yazi", NULL};
 static const char *spsysmon[]   = {"h", TERMINAL, "-t", "spsysmon","-e","btop", NULL};
 static const char *spmusic[]    = {"m", TERMINAL, "-t", "spmusic","-e","rmpc", NULL};
+static const char *sprss[]      = {"r", TERMINAL, "-t", "sprss","-e","newsboat", NULL};
 
 
 /*
@@ -205,17 +208,17 @@ static const Key keys[] = {
     { MODKEY,                       XK_w,      spawn,          {.v = browser } },
     { MODKEY,                       XK_e,      spawn,          {.v = email } },
     { MODKEY,                       XK_n,      spawn,          {.v = notes } },
+    { MODKEY|ShiftMask,             XK_n,      togglescratch,  {.v = sprss }},
     { MODKEY,                       XK_f,      spawn,          {.v = fileManager } },
     { MODKEY,                       XK_c,      spawn,          {.v = communicator } },
     { MODKEY|Mod1Mask,              XK_f,      spawn,          {.v = guiFileManager } },
     { MODKEY,                       XK_p,      spawn,          {.v = passwords } },
     { MODKEY|ShiftMask,             XK_b,      spawn,          {.v = books } },
     { MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("colorpicker") },
-    { MODKEY,                       XK_r,      spawn,          SHCMD("dmenu_run_desktop") },
     { MODKEY|ShiftMask,             XK_w,      spawn,          SHCMD("find $HOME/walls -type f -iname '*.png' | shuf | nsxiv -t -")},
     { MODKEY|ControlMask,           XK_w,      spawn,          SHCMD("wallpaper random") },
     { MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("screenshot") },
-    { MODKEY|ShiftMask,             XK_m,      spawn,          SHCMD("boomer") },
+    { MODKEY|ShiftMask|ControlMask, XK_m,      spawn,          SHCMD("boomer") },
     { 0,                            XK_Print,  spawn,          SHCMD("screenshot") },
     { MODKEY|Mod1Mask,              XK_space,  spawn,          SHCMD("playerctl -p mpd play-pause") },
     { MODKEY|Mod1Mask,              XK_period, spawn,          SHCMD("playerctl -p mpd next") },
