@@ -31,7 +31,7 @@ static char *colors[][3] = {
 
 #define TERMINAL "st"
 #define TERMCLASS "St"
-#define BROWSER "brave"
+#define BROWSER "librewolf"
 
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
@@ -43,6 +43,7 @@ static const Rule rules[] = {
     { "thunderbird",                 NULL,          NULL,               1 << 2,    0,          0,          0,          0,       0   }, // workspace 4, monitor 1
     { TERMCLASS,                     NULL,          NULL,               0,         0,          1,          0,         -1,       0   },
     { "floatingTerm",                NULL,          NULL,               0,         1,          1,          0,         -1,       0   },
+    { "Ghostscript",                 NULL,          NULL,               0,         0,          0,          1,         -1,       0   }, /* ghostscript */
     { NULL,                          NULL,          "Event Tester",     0,         0,          0,          1,         -1,       0   }, /* xev */
 	{ NULL,                          NULL,          "spterm",           0,         1,          1,          1,         -1,      't'   },
 	{ NULL,                          NULL,          "pulsemixer",       0,         1,          1,          1,         -1,      's'   },
@@ -106,7 +107,7 @@ static const char *termcmd[]         = { TERMINAL, NULL };
 static const char *browser[]         = { BROWSER, NULL };
 static const char *email[]           = { "thunderbird", NULL };
 static const char *notes[]           = { "obsidian", NULL};
-static const char *fileManager[]     = { TERMINAL, "-e", "yazi", NULL };
+static const char *fileManager[]     = { TERMINAL, "-e", "lfub", NULL };
 static const char *guiFileManager[]  = { "pcmanfm-qt", NULL };
 static const char *passwords[]       = { "keepassxc", NULL };
 static const char *books[]           = { "calibre", NULL };
@@ -118,7 +119,7 @@ static const char *spterm[]     = {"t", TERMINAL, "-t", "spterm", NULL};
 static const char *spsound[]    = {"s", TERMINAL, "-t", "pulsemixer","-e","pulsemixer", NULL};
 static const char *spbt[]       = {"b", TERMINAL, "-t", "spbt","-e","bluetuith",NULL};
 static const char *spnotes[]    = {"n", TERMINAL, "-t", "spnotes","-e","sh","-c","cd ~/dox/notes && $EDITOR", NULL};
-static const char *spfiles[]    = {"f", TERMINAL, "-t", "spfiles","-e","yazi", NULL};
+static const char *spfiles[]    = {"f", TERMINAL, "-t", "spfiles","-e","lfub", NULL};
 static const char *spsysmon[]   = {"h", TERMINAL, "-t", "spsysmon","-e","btop", NULL};
 static const char *spmusic[]    = {"m", TERMINAL, "-t", "spmusic","-e","rmpc", NULL};
 static const char *sprss[]      = {"r", TERMINAL, "-t", "sprss","-e","newsboat", NULL};
@@ -218,6 +219,8 @@ static const Key keys[] = {
     { MODKEY|ShiftMask,             XK_w,      spawn,          SHCMD("find $HOME/walls -type f -iname '*.png' | shuf | nsxiv -t -")},
     { MODKEY|ControlMask,           XK_w,      spawn,          SHCMD("wallpaper random") },
     { MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("screenshot") },
+    { MODKEY|ShiftMask,             XK_m,      spawn,          SHCMD("mpvq play") },
+    { MODKEY|ShiftMask,             XK_a,      spawn,          SHCMD("mpvq addclip") },
     { MODKEY|ShiftMask|ControlMask, XK_m,      spawn,          SHCMD("boomer") },
     { 0,                            XK_Print,  spawn,          SHCMD("screenshot") },
     { MODKEY|Mod1Mask,              XK_space,  spawn,          SHCMD("playerctl -p mpd play-pause") },
