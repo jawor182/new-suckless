@@ -112,7 +112,7 @@ static const char *guiFileManager[]  = { "pcmanfm-qt", NULL };
 static const char *passwords[]       = { "keepassxc", NULL };
 static const char *books[]           = { "calibre", NULL };
 static const char *communicator[]    = { "discord", NULL };
-static const char *lockscreen[]      = { "betterlockscreen", "-l", NULL };
+static const char *lockscreen[]      = { "slock", NULL };
 
 /* First arg only serves to match against key in rules*/
 static const char *spterm[]     = {"t", TERMINAL, "-t", "spterm", NULL};
