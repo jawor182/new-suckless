@@ -47,7 +47,6 @@ static const Rule rules[] = {
     { NULL,                          NULL,          "Event Tester",     0,         0,          0,          1,         -1,       0   }, /* xev */
 	{ NULL,                          NULL,          "spterm",           0,         1,          1,          1,         -1,      't'   },
 	{ NULL,                          NULL,          "pulsemixer",       0,         1,          1,          1,         -1,      's'   },
-	{ NULL,                          NULL,          "spbt",             0,         1,          1,          1,         -1,      'b'   },
 	{ NULL,                          NULL,          "spnotes",          0,         1,          1,          1,         -1,      'n'   },
 	{ NULL,                          NULL,          "spfiles",          0,         1,          1,          1,         -1,      'f'   },
 	{ NULL,                          NULL,          "spsysmon",         0,         1,          1,          1,         -1,      'h'   },
@@ -106,7 +105,7 @@ static const char *dmenucmd[]        = { "dmenu_run", NULL };
 static const char *termcmd[]         = { TERMINAL, NULL };
 static const char *browser[]         = { BROWSER, NULL };
 static const char *email[]           = { "thunderbird", NULL };
-static const char *notes[]           = { "obsidian", NULL};
+static const char *notes[]           = { TERMINAL,"-t","notes","-e","sh","-c","cd ~/dox/notes && $EDITOR", NULL};
 static const char *fileManager[]     = { TERMINAL, "-e", "lfub", NULL };
 static const char *guiFileManager[]  = { "pcmanfm-qt", NULL };
 static const char *passwords[]       = { "keepassxc", NULL };
@@ -117,10 +116,9 @@ static const char *lockscreen[]      = { "slock", NULL };
 /* First arg only serves to match against key in rules*/
 static const char *spterm[]     = {"t", TERMINAL, "-t", "spterm", NULL};
 static const char *spsound[]    = {"s", TERMINAL, "-t", "pulsemixer","-e","pulsemixer", NULL};
-static const char *spbt[]       = {"b", TERMINAL, "-t", "spbt","-e","bluetuith",NULL};
 static const char *spnotes[]    = {"n", TERMINAL, "-t", "spnotes","-e","sh","-c","cd ~/dox/notes && $EDITOR", NULL};
 static const char *spfiles[]    = {"f", TERMINAL, "-t", "spfiles","-e","lfub", NULL};
-static const char *spsysmon[]   = {"h", TERMINAL, "-t", "spsysmon","-e","btop", NULL};
+static const char *spsysmon[]   = {"M", TERMINAL, "-t", "spsysmon","-e","btop", NULL};
 static const char *spmusic[]    = {"m", TERMINAL, "-t", "spmusic","-e","rmpc", NULL};
 static const char *sprss[]      = {"r", TERMINAL, "-t", "sprss","-e","newsboat", NULL};
 
@@ -151,10 +149,9 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ControlMask,           XK_Return, togglescratch,  {.v = spterm } },
 	{ MODKEY|ControlMask,           XK_s,      togglescratch,  {.v = spsound } },
-	{ MODKEY|ControlMask,           XK_b,      togglescratch,  {.v = spbt } },
 	{ MODKEY|ControlMask,           XK_n,      togglescratch,  {.v = spnotes } },
 	{ MODKEY|ControlMask,           XK_f,      togglescratch,  {.v = spfiles } },
-	{ MODKEY|ControlMask,           XK_t,      togglescratch,  {.v = spsysmon } },
+	{ MODKEY|ControlMask,           XK_m,      togglescratch,  {.v = spsysmon } },
 	{ MODKEY,                       XK_m,      togglescratch,  {.v = spmusic } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	STACKKEYS(MODKEY,                          focus)
