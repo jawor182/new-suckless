@@ -49,7 +49,7 @@ static const Rule rules[] = {
 	{ NULL,                          NULL,          "pulsemixer",       0,         1,          1,          1,         -1,      's'   },
 	{ NULL,                          NULL,          "spnotes",          0,         1,          1,          1,         -1,      'n'   },
 	{ NULL,                          NULL,          "spfiles",          0,         1,          1,          1,         -1,      'f'   },
-	{ NULL,                          NULL,          "spsysmon",         0,         1,          1,          1,         -1,      'h'   },
+	{ NULL,                          NULL,          "spsysmon",         0,         1,          1,          1,         -1,      'M'   },
 	{ NULL,                          NULL,          "spmusic",          0,         1,          1,          1,         -1,      'm'   },
 	{ NULL,                          NULL,          "sprss",            0,         1,          1,          1,         -1,      'r'   },
 };
