@@ -257,7 +257,6 @@ static void propertynotify(XEvent *e);
 static void pushstack(const Arg *arg);
 static void quit(const Arg *arg);
 static Monitor *recttomon(int x, int y, int w, int h);
-static void removescratch(const Arg *arg);
 static void resize(Client *c, int x, int y, int w, int h, int interact);
 static void resizeclient(Client *c, int x, int y, int w, int h);
 static void resizemouse(const Arg *arg);
@@ -278,7 +277,6 @@ static void setfullscreen(Client *c, int fullscreen);
 static void setlayout(const Arg *arg);
 static void setcfact(const Arg *arg);
 static void setmfact(const Arg *arg);
-static void setscratch(const Arg *arg);
 static void spawnscratch(const Arg *arg);
 static int stackpos(const Arg *arg);
 static void togglescratch(const Arg *arg);
@@ -1748,15 +1746,6 @@ removesystrayicon(Client *i)
 }
 
 void
-removescratch(const Arg *arg)
-{
-	Client *c = selmon->sel;
-	if (!c)
-		return;
-	c->scratchkey = 0;
-}
-
-void
 resize(Client *c, int x, int y, int w, int h, int interact)
 {
 	if (applysizehints(c, &x, &y, &w, &h, interact))
@@ -2066,16 +2055,6 @@ setmfact(const Arg *arg)
 		return;
 	selmon->mfact = selmon->pertag->mfacts[selmon->pertag->curtag] = f;
 	arrange(selmon);
-}
-
-void
-setscratch(const Arg *arg)
-{
-	Client *c = selmon->sel;
-	if (!c)
-		return;
-
-	c->scratchkey = ((char**)arg->v)[0][0];
 }
 
 void
