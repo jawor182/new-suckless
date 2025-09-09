@@ -214,7 +214,7 @@ static const Key keys[] = {
     { MODKEY,                       XK_p,      spawn,          {.v = passwords } },
     { MODKEY|ShiftMask,             XK_b,      spawn,          {.v = books } },
     { MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("colorpicker") },
-    { MODKEY|ShiftMask,             XK_w,      spawn,          SHCMD("find $HOME/walls -type f -iname '*.png' | shuf | nsxiv -t -")},
+    { MODKEY|ShiftMask,             XK_w,      spawn,          SHCMD("wallpaper open")},
     { MODKEY|ControlMask,           XK_w,      spawn,          SHCMD("wallpaper random") },
     { MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("screenshot") },
     { MODKEY|ShiftMask,             XK_m,      spawn,          SHCMD("mpvq play") },
