@@ -1,7 +1,0 @@
-config.h
-version.h
-*.d
-*.o
-*-protocol.c
-*-protocol.h
-swiv
