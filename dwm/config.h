@@ -108,7 +108,6 @@ static const char *browser[]         = { BROWSER, NULL };
 static const char *email[]           = { "thunderbird", NULL };
 static const char *notes[]           = { TERMINAL,"-t","notes","-e","sh","-c","cd ~/dox/notes && $EDITOR", NULL};
 static const char *fileManager[]     = { TERMINAL, "-e", "yazi", NULL };
-static const char *guiFileManager[]  = { "pcmanfm-qt", NULL };
 static const char *passwords[]       = { "keepassxc", NULL };
 static const char *books[]           = { "calibre", NULL };
 static const char *communicator[]    = { "discord", NULL };
@@ -210,7 +209,6 @@ static const Key keys[] = {
     { MODKEY|ShiftMask,             XK_n,      togglescratch,  {.v = sprss }},
     { MODKEY,                       XK_f,      spawn,          {.v = fileManager } },
     { MODKEY,                       XK_c,      spawn,          {.v = communicator } },
-    { MODKEY|Mod1Mask,              XK_f,      spawn,          {.v = guiFileManager } },
     { MODKEY,                       XK_p,      spawn,          {.v = passwords } },
     { MODKEY|ShiftMask,             XK_b,      spawn,          {.v = books } },
     { MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("colorpicker") },
