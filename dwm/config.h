@@ -5,7 +5,6 @@ static unsigned int gappiv          = 8;        /* vert inner gap between window
 static unsigned int gappoh          = 8;        /* horiz outer gap between windows and screen edge */
 static unsigned int gappov          = 8;        /* vert outer gap between windows and screen edge */
 static unsigned int systraypinning  = 1;        /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
-static unsigned int systrayonleft   = 0;        /* 0: systray in the right corner, >0: systray on left of status text */
 static unsigned int systrayspacing  = 2;        /* systray spacing */
 static int systraypinningfailfirst  = 1;        /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static unsigned int systrayiconsize = 32;       /* systray icon size in px */
