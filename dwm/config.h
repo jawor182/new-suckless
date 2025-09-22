@@ -224,6 +224,7 @@ static const Key keys[] = {
     { MODKEY|Mod1Mask,              XK_comma,  spawn,          SHCMD("playerctl -p mpd previous") },
     { MODKEY|Mod1Mask,              XK_equal,  spawn,          SHCMD("playerctl -p mpd volume 0.05+") },
     { MODKEY|Mod1Mask,              XK_minus,  spawn,          SHCMD("playerctl -p mpd volume 0.05-") },
+    { MODKEY|Mod1Mask,              XK_s,      spawn,          SHCMD("playerctl -p mpd pause && playerctl -p mpd position 0") },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
