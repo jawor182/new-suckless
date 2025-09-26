@@ -1794,6 +1794,7 @@ pushstack(const Arg *arg) {
 		c->next = sel;
 	}
 	arrange(selmon);
+  XWarpPointer(dpy, None, sel->win, 0, 0, 0, 0, sel->w / 2, sel->h / 2);
 }
 
 void
