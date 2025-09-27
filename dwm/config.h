@@ -120,7 +120,7 @@ static const char *spsound[]    = {"s", TERMINAL, "-t", "pulsemixer","-e","pulse
 static const char *spnotes[]    = {"n", TERMINAL, "-t", "spnotes","-e","sh","-c","cd ~/dox/notes && $EDITOR", NULL};
 static const char *spfiles[]    = {"f", TERMINAL, "-t", "spfiles","-e","yazi", NULL};
 static const char *spsysmon[]   = {"M", TERMINAL, "-t", "spsysmon","-e","btop", NULL};
-static const char *spmusic[]    = {"m", TERMINAL, "-t", "spmusic","-e","ncmpcpp", NULL};
+static const char *spmusic[]    = {"m", TERMINAL, "-t", "spmusic","-e","rmpc", NULL};
 static const char *sprss[]      = {"r", TERMINAL, "-t", "sprss","-e","newsboat", NULL};
 
 
