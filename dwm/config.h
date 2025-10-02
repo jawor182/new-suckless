@@ -41,7 +41,6 @@ static const Rule rules[] = {
     /* class                         instance       title               tags mask  isfloating  isterminal  noswallow  monitor  scratchkey*/
     { "mpv",                         NULL,          NULL,               0,         1,          0,          0,          1,       0   },
     { "KeePassXC",                   NULL,          NULL,               1 << 8,    0,          0,          0,          0,       0   }, // workspace 9, monitor 1
-    { "discord",                     NULL,          NULL,               1 << 3,    0,          0,          0,          1,       0   }, // workspace 4, monitor 2
     { "thunderbird",                 NULL,          NULL,               1 << 2,    0,          0,          0,          0,       0   }, // workspace 4, monitor 1
     { TERMCLASS,                     NULL,          NULL,               0,         0,          1,          0,         -1,       0   },
     { "floatingTerm",                NULL,          NULL,               0,         1,          1,          0,         -1,       0   },
@@ -111,7 +110,6 @@ static const char *notes[]           = { TERMINAL,"-t","notes","-e","sh","-c","c
 static const char *fileManager[]     = { TERMINAL, "-e", "yazi", NULL };
 static const char *passwords[]       = { "keepassxc", NULL };
 static const char *books[]           = { "calibre", NULL };
-static const char *communicator[]    = { "discord", NULL };
 static const char *lockscreen[]      = { "slock", NULL };
 
 /* First arg only serves to match against key in rules*/
@@ -210,7 +208,6 @@ static const Key keys[] = {
     { MODKEY,                       XK_n,      spawn,          {.v = notes } },
     { MODKEY|ShiftMask,             XK_n,      togglescratch,  {.v = sprss }},
     { MODKEY,                       XK_f,      spawn,          {.v = fileManager } },
-    { MODKEY|ShiftMask,             XK_c,      spawn,          {.v = communicator } },
     { MODKEY,                       XK_p,      spawn,          {.v = passwords } },
     { MODKEY|ShiftMask,             XK_b,      spawn,          {.v = books } },
     { MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("colorpicker") },
