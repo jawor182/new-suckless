@@ -30,6 +30,8 @@ static char *colors[][3] = {
        [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
        [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
 };
+static const XPoint stickyicon[]    = { {0,0}, {4,0}, {4,8}, {2,6}, {0,8}, {0,0} }; /* represents the icon as an array of vertices */
+static const XPoint stickyiconbb    = {4,8};	/* defines the bottom right corner of the polygon's bounding box (speeds up scaling) */
 
 #define TERMINAL "st"
 #define TERMCLASS "St"
@@ -195,6 +197,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	{ MODKEY,                       XK_c,      movecenter,     {0} },
+	{ MODKEY,                       XK_s,      togglesticky,   {0} },
     { 0,                            XF86XK_AudioMute,          spawn,   SHCMD("wpctl  set-mute   @DEFAULT_AUDIO_SINK@ toggle && pkill -RTMIN+9 dwmblocks" ) },
 	{ 0,                            XF86XK_AudioLowerVolume,   spawn,   SHCMD("wpctl  set-volume @DEFAULT_AUDIO_SINK@ 5%- && pkill -RTMIN+9 dwmblocks && pkill -RTMIN+9 dwmblocks" ) },
 	{ 0,                            XF86XK_AudioRaiseVolume,   spawn,   SHCMD("wpctl  set-volume @DEFAULT_AUDIO_SINK@ 5%+ && pkill -RTMIN+9 dwmblocks && pkill -RTMIN+9 dwmblocks" ) },
