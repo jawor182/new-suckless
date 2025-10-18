@@ -42,8 +42,9 @@ static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 static const Rule rules[] = {
     /* class                         instance       title               tags mask  isfloating  isterminal  noswallow  monitor  scratchkey*/
     { "mpv",                         NULL,          NULL,               0,         1,          0,          0,          1,       0   },
-    { "KeePassXC",                   NULL,          NULL,               1 << 8,    0,          0,          0,          0,       0   }, // workspace 9, monitor 1
-    { "thunderbird",                 NULL,          NULL,               1 << 2,    0,          0,          0,          0,       0   }, // workspace 4, monitor 1
+    { "KeePassXC",                   NULL,          NULL,               1 << 8,    0,          0,          0,          0,       0   },
+    { "thunderbird",                 NULL,          NULL,               1 << 2,    0,          0,          0,          0,       0   },
+    { "discord",                     NULL,          NULL,               1 << 3,    0,          0,          0,          1,       0   },
     { TERMCLASS,                     NULL,          NULL,               0,         0,          1,          0,         -1,       0   },
     { "floatingTerm",                NULL,          NULL,               0,         1,          1,          0,         -1,       0   },
     { "Ghostscript",                 NULL,          NULL,               0,         0,          0,          1,         -1,       0   }, /* ghostscript */
@@ -113,6 +114,7 @@ static const char *fileManager[]     = { TERMINAL, "-e", "yazi", NULL };
 static const char *passwords[]       = { "keepassxc", NULL };
 static const char *books[]           = { "calibre", NULL };
 static const char *lockscreen[]      = { "slock", NULL };
+static const char *communicator[]    = { "discord", NULL };
 
 /* First arg only serves to match against key in rules*/
 static const char *spterm[]     = {"t", TERMINAL, "-t", "spterm", NULL};
@@ -213,6 +215,7 @@ static const Key keys[] = {
     { MODKEY,                       XK_f,      spawn,          {.v = fileManager } },
     { MODKEY,                       XK_p,      spawn,          {.v = passwords } },
     { MODKEY|ShiftMask,             XK_b,      spawn,          {.v = books } },
+    { MODKEY|ShiftMask,             XK_c,      spawn,          {.v = communicator } },
     { MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("colorpicker") },
     { MODKEY|ShiftMask,             XK_w,      spawn,          SHCMD("wallpaper open")},
     { MODKEY|ControlMask,           XK_w,      spawn,          SHCMD("wallpaper random") },
