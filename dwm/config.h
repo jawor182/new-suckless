@@ -214,6 +214,8 @@ static const Key keys[] = {
     { MODKEY|ShiftMask,             XK_n,      togglescratch,  {.v = sprss }},
     { MODKEY,                       XK_f,      spawn,          {.v = fileManager } },
     { MODKEY,                       XK_p,      spawn,          {.v = passwords } },
+    { MODKEY,                       XK_grave,  spawn,          SHCMD("dmenubookmarks select") },
+    { MODKEY|Mod1Mask,              XK_a,      spawn,          SHCMD("dmenubookmarks add") },
     { MODKEY|ShiftMask,             XK_b,      spawn,          {.v = books } },
     { MODKEY|ShiftMask,             XK_c,      spawn,          {.v = communicator } },
     { MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("colorpicker") },
