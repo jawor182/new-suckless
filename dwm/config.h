@@ -227,6 +227,7 @@ static const Key keys[] = {
     { MODKEY|ShiftMask,             XK_e,      spawn,          SHCMD("dmenuunicode") },
     { MODKEY|ShiftMask|ControlMask, XK_m,      spawn,          SHCMD("boomer") },
     { 0,                            XK_Print,  spawn,          SHCMD("screenshot") },
+    { MODKEY|ShiftMask|Mod1Mask,    XK_space,  spawn,          SHCMD("playerctl -p mpv play-pause") },
     { MODKEY|Mod1Mask,              XK_space,  spawn,          SHCMD("playerctl -p mpd play-pause") },
     { MODKEY|Mod1Mask,              XK_period, spawn,          SHCMD("playerctl -p mpd next") },
     { MODKEY|Mod1Mask,              XK_comma,  spawn,          SHCMD("playerctl -p mpd previous") },
