@@ -43,7 +43,7 @@ static const Rule rules[] = {
     /* class                         instance       title               tags mask  isfloating  isterminal  noswallow  monitor  scratchkey*/
     { "mpv",                         NULL,          NULL,               0,         1,          0,          0,          1,       0   },
     { "KeePassXC",                   NULL,          NULL,               1 << 8,    0,          0,          0,          0,       0   },
-    { "thunderbird",                 NULL,          NULL,               1 << 2,    0,          0,          0,          0,       0   },
+    { "org.mozilla.Thunderbird",     NULL,          NULL,               1 << 2,    0,          0,          0,          0,       0   },
     { "discord",                     NULL,          NULL,               1 << 3,    0,          0,          0,          1,       0   },
     { TERMCLASS,                     NULL,          NULL,               0,         0,          1,          0,         -1,       0   },
     { "floatingTerm",                NULL,          NULL,               0,         1,          1,          0,         -1,       0   },
